@@ -45,8 +45,9 @@ function App() {
       </div> */}
     
       <Header />
-      <Pokemon pokemonId={Math.floor(Math.random()*1000)}/>
+      
       <Routes>
+      <Route path="/pokemon" element={<Pokemon pokemonId={Math.floor(Math.random()*1000)}/>} />
         <Route path="/" element={<User />} />
         <Route path="/CreateUser" element={<CreateNewUser />} />
         <Route path="/pokemons" element={<PokemonInfo cart={cart} setCart={setCart}/>} />

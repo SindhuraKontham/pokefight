@@ -44,7 +44,7 @@ function PokemonType({ id, name }) {
             <div className="poke0">
               {pokemonData[0] === "Grass" ? (
                 <div className="icon grass">
-                  <img src={grass} />
+                  <img src={grass} alt="grass"/>
                 </div>
               ) : pokemonData[0] === "Dark" ? (
                 <div className="icon dark">

@@ -1,9 +1,9 @@
-body {
+.body {
     padding-top: 10rem;
     padding-bottom: 5rem;
     padding-left: 5rem;
     padding-right: 5rem;
-    background-color: rgba(132, 138, 138, 0.876);
+    /* background-color: rgba(132, 138, 138, 0.876); */
   }
   
 
