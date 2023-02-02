@@ -9,10 +9,13 @@ import Pokemon from "./components/Pokemon";
 import Header from "./components/Header";
 import User from "./components/User";
 import CreateNewUser from "./components/CreateNewUser";
+import PokeCart from './components/PokeCart';
+import PokemonInfo from './components/PokemonInfo';
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     axios
@@ -34,19 +37,20 @@ function App() {
   return (
     <div>
 
-      <div>
+      {/* <div>
         <Search pokemons={pokemons} setSearchResults={setSearchResults} />
       </div>
       <div>
         <ListPage searchResults={searchResults} />
-      </div>
-      <Pokemon pokemonId={Math.floor(Math.random()*1000)}/>
-
+      </div> */}
+    
       <Header />
+      <Pokemon pokemonId={Math.floor(Math.random()*1000)}/>
       <Routes>
-        {/* to be changed to path:"/" */}
-        <Route path="/user" element={<User />} />
+        <Route path="/" element={<User />} />
         <Route path="/CreateUser" element={<CreateNewUser />} />
+        <Route path="/pokemons" element={<PokemonInfo cart={cart} setCart={setCart}/>} />
+        <Route path="/cart" element={<PokeCart cart={cart} setCart={setCart} />} />
       </Routes>
       {/* to be children of sindhuras component in new Route:"/" */}
       <Search pokemons={pokemons} setSearchResults={setSearchResults} />
