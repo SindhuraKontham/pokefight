@@ -1,20 +1,32 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 
-const Pokemon = ({ pokemon }) => {
-  // console.log(pokemon.name)
-  // console.log(pokemon.type)
-  // console.log(pokemon.base)
-  return (
-    <article>
-      <h2>{pokemon.name.english}</h2>
-      <p>Type: {pokemon.type[0]}, {pokemon.type[1]}, {pokemon.type[2]}</p>
-      <p>HP: {pokemon.base.HP}</p>
-      <p>Attack: {pokemon.base.Attack}</p>
-      <p>Defense: {pokemon.base.Defense}</p>
-      <p>Speed: {pokemon.base.Speed}</p>
+function Pokemon({ pokemonId }) {
+    const [pokemon, setPokemon] = useState([]);
 
-    </article>
-  )
+    useEffect(() => {
+        axios
+            .get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+            .then(response => {
+                console.log(response.data);
+                setPokemon(response.data);
+            })
+    }, [pokemonId]);
+
+    return (
+
+        <div className='pokemon-card'>
+            <h1>{pokemon.name}</h1>
+            {/* <img src={pokemon.sprites?.front_default} alt={pokemon.name} /> */}
+            <img src={pokemon.sprites?.other?.dream_world.front_default} alt={pokemon.name} />
+            <p>HP: {pokemon.stats?.[0].base_stat} </p>
+            <p>Attack: {pokemon.stats?.[1].base_stat} </p>
+            <p>Defense: {pokemon.stats?.[2].base_stat}</p>
+            <p>Speed: {pokemon.stats?.[5].base_stat} </p>
+        </div>
+
+
+    )
 }
 
 export default Pokemon

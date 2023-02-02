@@ -33,6 +33,7 @@ function App() {
       <div>
         <ListPage searchResults={searchResults} />
       </div>
+      <Pokemon pokemonId={Math.floor(Math.random()*1000)}/>
     </div>
   );
 }
