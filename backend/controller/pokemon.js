@@ -21,9 +21,9 @@ const getPokemon = (req, res) => {
 const getPokemonInfo = async (req, res) => {
     try {
         const { id ,info } = req.params;
-        if(info === "name") {res.json(jsonData[id].name )}
-        else if (info === "type"){res.json(jsonData[id].type)}
-        else res.json(jsonData[id].base) 
+        if(info === "name") {res.json(jsonData[id-1].name )}
+        else if (info === "type"){res.json(jsonData[id-1].type)}
+        else res.json(jsonData[id-1].base) 
       } catch (err) {
         res.status(500).send("Something went wrong, Please try again later!!");
       }

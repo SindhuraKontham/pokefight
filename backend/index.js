@@ -5,16 +5,13 @@ const express = require("express");
 const {pokemonRouter} = require("./router/pokemon")
 var cors = require('cors')
 
-
-
 const app = express();
 app.use(cors())
-
 app.use(express.json());
 
 app.use("/pokemon", pokemonRouter)
 
-const PORT = process.env.PORT;
+const PORT = 3001;
 
 app.listen(PORT,()=>{
     console.log(`Server is connected to port ${PORT} and is running!`)

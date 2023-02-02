@@ -1,0 +1,26 @@
+
+.App {
+  text-align: center;
+}
+
+.LogoDiv {
+  background-color: rgb(26, 42, 87);
+  padding: 2rem 3rem 3rem 3rem;
+}
+
+.LogoDiv img {
+  height: 5rem;
+}
+
+.LogoDiv h2 {
+  color: rgb(255, 217, 0);
+  position: absolute;
+  margin-top: -0.5rem;
+  margin-left: 3rem;
+  font-size: 1.5rem;
+}
+
+.User {
+  text-align: center;
+}
+
