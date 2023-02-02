@@ -1,0 +1,77 @@
+body {
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    background-color: rgba(132, 138, 138, 0.876);
+  }
+  
+
+  .cardmain {
+    gap: 5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .card {
+    border: 1px solid rgb(32, 33, 41);
+    background-image: linear-gradient(
+        45deg,
+        #993cc0bb,
+        #95aeb5,
+        #319190
+    );
+    border-radius: 1rem;
+  }
+
+  .cart {
+    /* float: right; */
+    padding: 1rem 1rem ;
+  }
+  
+  .cardImage {
+    width: 100px;
+    height: 100px;
+    mix-blend-mode: multiply;
+  }
+
+  .title {
+    font-family: 'Aboreto', cursive;
+    font-size: large;
+    font-weight: bold;
+    /* mix-blend-mode: multiply; */
+  }
+
+    .button {
+      border-radius: 1rem;
+     background-color: #468685;
+     /* mix-blend-mode: multiply; */
+     /* cursor: pointer; */
+    }
+
+    .button:hover{
+      filter: saturate(200%);
+      transform: scale(1.1);
+      cursor: pointer;
+  }
+
+  
+  .nav {
+    display: flex;
+    justify-content: center;
+  }
+
+  .description {
+    display: flex;
+    /* gap: 0.5rem; */
+    flex-direction: row;
+    justify-content:right;
+  }
+
+  .poke0,.poke1 {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
