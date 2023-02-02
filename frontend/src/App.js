@@ -33,6 +33,15 @@ function App() {
 
   return (
     <div>
+
+      <div>
+        <Search pokemons={pokemons} setSearchResults={setSearchResults} />
+      </div>
+      <div>
+        <ListPage searchResults={searchResults} />
+      </div>
+      <Pokemon pokemonId={Math.floor(Math.random()*1000)}/>
+
       <Header />
       <Routes>
         {/* to be changed to path:"/" */}
@@ -42,6 +51,7 @@ function App() {
       {/* to be children of sindhuras component in new Route:"/" */}
       <Search pokemons={pokemons} setSearchResults={setSearchResults} />
       <ListPage searchResults={searchResults} />
+
     </div>
   );
 }
