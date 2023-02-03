@@ -5,13 +5,14 @@
   }
 
 .input_form {
-  width: 95%;
+  width: 65%;
   border: 2px solid #000;
   border-radius: 2em;
   overflow: hidden;
   font-size: 1rem;
   display: flex;
   flex-flow: row nowrap;
+  margin: 2.5em;
 }
 
 .search_button,
@@ -22,7 +23,7 @@
 }
 
 .search_input {
-  padding: 1em;
+  padding: 0.5em;
   width: 85%;
   font-size: 1.5rem;
 }
