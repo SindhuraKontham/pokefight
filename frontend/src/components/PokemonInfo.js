@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 import "./pokemoninfo.css";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Search from "./Search";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-function PokemonInfo({ cart, setCart }) {
+function PokemonInfo({ cart, setCart, pokemons, setSearchResults }) {
   const [pokePic, setPokePic] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -27,9 +28,36 @@ function PokemonInfo({ cart, setCart }) {
       });
   }, []);
 
+  const handleSubmit = (e) => e.preventDefault();
+
+  const handleSearchChange = (e) => {
+    if (!e.target.value) return setSearchResults(pokemons);
+
+    const searchWord = e.target.value;
+    const resultsArray = pokemons.filter((pokemon) => {
+      return (
+        pokemon.name.english.toLowerCase().includes(searchWord.toLowerCase()) ||
+        pokemon.type.toLowerCase().includes(e.target.value)
+      );
+    });
+
+    setSearchResults(resultsArray);
+  };
+
   return (
     <div>
-      <Search />
+      <form className="input_form" onSubmit={handleSubmit}>
+        <input
+          className="search_input"
+          type="text"
+          placeholder="Search Pokemon"
+          id="search"
+          onChange={handleSearchChange}
+        />
+        <button className="search_button">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
+      </form>
 
       <div className="cart">
         <Link to="/cart">
