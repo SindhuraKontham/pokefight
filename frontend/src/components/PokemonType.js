@@ -22,9 +22,9 @@ import steel from "./icons/steel.svg";
 import water from "./icons/water.svg";
 import "./pokemoninfo.css";
 
-function PokemonType({ id, name }) {
+function PokemonType({ id }) {
   const [pokemonData, setPokemonData] = useState([]);
-  const url = `http://localhost:8034/pokemon/${id}/type`;
+  const url = `http://localhost:3001/pokemon/${id+1}/type`;
 
   useEffect(() => {
     axios

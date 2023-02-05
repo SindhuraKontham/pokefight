@@ -10,6 +10,8 @@ function Pokemon({ pokemonId }) {
       .then((response) => {
         console.log(response.data);
         setPokemon(response.data);
+      }).catch((err) => {
+        console.log(err);
       });
   }, [pokemonId]);
 

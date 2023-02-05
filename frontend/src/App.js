@@ -10,6 +10,7 @@ import User from "./components/User";
 import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
 import PokemonInfo from "./components/PokemonInfo";
+import ListPage from "./ListPage";
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
@@ -17,21 +18,25 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    axios
+    const fetchPokemons = async () => {
+      const res = await axios
       .get("http://localhost:3001/pokemon")
       .then((res) => {
         const response = res.data;
         setPokemons(response);
-        console.log(response);
+        // console.log(response);
         return response;
-      })
+      }, fetchPokemons() )
       .then((response) => {
         setSearchResults(response);
       })
       .catch((err) => {
         console.log(err);
       });
+    } 
   }, []);
+   
+    
 
   return (
     <>
@@ -51,10 +56,10 @@ function App() {
               />
             }
           />
-          <Route
+          {/* <Route
             path="/pokemons/pokemon"
             element={<Pokemon pokemonId={Math.floor(Math.random() * 1000)} />}
-          />
+          /> */}
           <Route
             path="/cart"
             element={<PokeCart cart={cart} setCart={setCart} />}
