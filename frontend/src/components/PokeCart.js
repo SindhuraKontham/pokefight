@@ -10,9 +10,9 @@ import {
   MDBRow,
 } from "mdb-react-ui-kit";
 
-export default function PokeCart({cart,setCart}) {
+export default function PokeCart({ cart, setCart }) {
   return (
-    <section className="vh-100" style={{ backgroundColor: "#fdccbc" }}>
+       <section className="vh-100" style={{ backgroundColor: "#fdccbc" }}>
       <MDBContainer className="h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol>
@@ -59,7 +59,7 @@ export default function PokeCart({cart,setCart}) {
 
             <div className="d-flex justify-content-end">
               <MDBBtn color="light" size="lg" className="me-2">
-               Ready to Fight
+                Ready to Fight
               </MDBBtn>
               <MDBBtn size="lg">Edit cart</MDBBtn>
             </div>

@@ -4,20 +4,21 @@ import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import Pokemon from "./components/Pokemon";
+// import Pokemon from "./components/Pokemon";
 import Header from "./components/Header";
 import User from "./components/User";
 import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
 import PokemonInfo from "./components/PokemonInfo";
-import ListPage from "./ListPage";
+
 
 function App() {
-  const [pokemons, setPokemons] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  const [pokemons, setPokemons] = useState([]); // eslint-disable-next-line
+  const [setSearch, setSearchResults] = useState([]); 
   const [cart, setCart] = useState([]);
+  const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchPokemons = async () => {
       const res = await axios
       .get("http://localhost:3001/pokemon")
@@ -36,11 +37,20 @@ function App() {
     } 
   }, []);
    
-    
+    const cartQuantity = cart.reduce((quantity, item) => item.quantity + quantity, 1)
+
+    const openCart = () => {
+      setIsOpen(true)
+    }
+
+    const closeCart = () => {
+      setIsOpen(false)
+    }
+
 
   return (
     <>
-      <Header />
+      <Header cartQuantity={cartQuantity} openCart={openCart} closeCart={closeCart}  />
       <Container>
         <Routes>
           <Route path="/" element={<User />} />
@@ -62,11 +72,9 @@ function App() {
           /> */}
           <Route
             path="/cart"
-            element={<PokeCart cart={cart} setCart={setCart} />}
+            element={<PokeCart cart={cart} setCart={setCart} cartQuantity={cartQuantity} openCart={openCart} closeCart={closeCart} isOpen={isOpen} />}
           />
         </Routes>
-        {/* to be children of sindhuras component in new Route:"/" */}
-        {/* <ListPage searchResults={searchResults} /> */}
       </Container>
     </>
   );
