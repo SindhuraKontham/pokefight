@@ -1,19 +1,19 @@
-import { Button, Container, Nav, Navbar as NavBs } from "react-bootstrap";
+import { Button, Container, Nav, Navbar as NavBs, Stack } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Pokeball from "./images/pokeball.png";
 import "./navbar.css";
-import PokeBall from "./Pokeball";
-import { useState } from "react"
+import { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
+import CartItem from "./CartItem"
 
-
-export default function Navbar({ cartQuantity, openCart, closeCart, isOpen }) {
+export default function Navbar({ cartQuantity}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
+  const cartItems = useState("")
+
   return (
     <NavBs bg="" variant="dark" sticky="top" className="shadow-sm mb-3 nav">
       <Container>
@@ -28,33 +28,37 @@ export default function Navbar({ cartQuantity, openCart, closeCart, isOpen }) {
             Yours Pokemons
           </Nav.Link>
         </Nav>
-        
-          <Button
-            onClick={handleShow}
-            style={{ position: "relative" }}
-            variant=""
-          >
-            <img
-              src={Pokeball}
-              alt="Pokeball"
-              style={{ width: "4rem", height: "4rem" }}
-            />
-            {cartQuantity > 0 && (
+
+        <Button
+          onClick={handleShow}
+          style={{ position: "relative" }}
+          variant=""
+        >
+          <img
+            src={Pokeball}
+            alt="Pokeball"
+            style={{ width: "4rem", height: "4rem" }}
+          />
+          {cartQuantity > 0 && (
             <div className="rounded-circle bg-danger d-flex justify-content-center align-items-center pokeball">
               {cartQuantity}
-            </div> )}
-         
-          </Button>
-          <Offcanvas show={show} onHide={handleClose} responsive="lg">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Responsive offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <p className="mb-0">
-            This is content within an <code>.offcanvas-lg</code>.
-          </p>
-        </Offcanvas.Body>
-      </Offcanvas>
+            </div>
+          )}
+        </Button>
+        <Offcanvas show={show} onHide={handleClose} placement="end">
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Pokemon Cart</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Stack gap={3}>
+              {cartItems.map(item => (
+                <CartItem key={item.id} {...item} />
+              ))}
+
+            </Stack>
+            pokemons here
+          </Offcanvas.Body>
+        </Offcanvas>
       </Container>
     </NavBs>
   );

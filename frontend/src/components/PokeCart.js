@@ -19,7 +19,7 @@ export default function PokeCart({ cart, setCart }) {
             <p>
               <span className="h2">Pokemon Cart </span>
             </p>
-
+          
             <MDBCard className="mb-4">
               <MDBCardBody className="p-4">
                 <MDBRow className="align-items-center">

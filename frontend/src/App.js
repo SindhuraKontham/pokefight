@@ -18,24 +18,22 @@ function App() {
   const [cart, setCart] = useState([]);
   const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => { 
-    const fetchPokemons = async () => {
-      const res = await axios
-      .get("http://localhost:3001/pokemon")
-      .then((res) => {
-        const response = res.data;
-        setPokemons(response);
-        // console.log(response);
-        return response;
-      }, fetchPokemons() )
-      .then((response) => {
-        setSearchResults(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    } 
-  }, []);
+    useEffect(() => {
+      axios
+        .get("http://localhost:3001/pokemon")
+        .then((res) => {
+          const response = res.data;
+          setPokemons(response);
+          console.log(response);
+          return response;
+        })
+        .then((response) => {
+          setSearchResults(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
    
     const cartQuantity = cart.reduce((quantity, item) => item.quantity + quantity, 1)
 
