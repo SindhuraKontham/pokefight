@@ -10,6 +10,7 @@ import User from "./components/User";
 import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
 import PokemonInfo from "./components/PokemonInfo";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [pokemons, setPokemons] = useState([]); // eslint-disable-next-line
@@ -76,6 +77,12 @@ function App() {
         cartQuantity={cartQuantity}
         openCart={openCart}
         closeCart={closeCart}
+      />
+      <Navbar
+        cartQuantity={cartQuantity}
+        openCart={openCart}
+        closeCart={closeCart}
+        isOpen={isOpen}
       />
       <Container>
         <Routes>

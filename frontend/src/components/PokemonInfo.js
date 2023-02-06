@@ -9,12 +9,13 @@ import PokemonList from "./PokemonList";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-
 function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(6);
   const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const pokRef = useRef();
+ 
 
   useEffect(() => {
     setLoading(true);
@@ -45,9 +46,28 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
   };
 
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const item = e.target.newItem.value;
+    if (!item) {
+      return setPokemonsInfo();
+    }
+    if (item) setPokemonsInfo([...pokemonsInfo, item]);
+    e.target.reset();
+  };
+
+  const search = (data) => {
+    return data.filter((item) => item.name.toLowerCase().includes(query));
+  };
+
   return (
     <div className="body">
       <Container>
+        <Search  data={search(pokemonsInfo)}
+        handleSubmit={handleSubmit}
+        query={query}
+        setQuery={setQuery}
+        pokemonsInfo={pokemonsInfo}/>
         <Row>
         <Stack spacing={2}>
             <Pagination 
@@ -70,6 +90,7 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
               cart={cart}
               setCart={setCart}
               user = {user}
+              query={query}
             />
           )}
       

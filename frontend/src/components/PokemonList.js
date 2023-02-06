@@ -4,12 +4,13 @@ import PokemonType from "./PokemonType";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 
-function PokemonList({ pokemonsInfo, cart, setCart, user }) {
-  console.log(user);
-  return (
-    <div>
-      <Col sm={8} className="cardmain">
-        {pokemonsInfo.map((pokemon, index) => {
+function PokemonList({pokemonsInfo,cart,setCart, query,user}) {
+    console.log(pokemonsInfo)
+  return (<div>
+         <Col sm={8} className="cardmain">
+        {pokemonsInfo
+        .filter((pokemon) => pokemon.name.toLowerCase().includes(query))
+        .map((pokemon, index) => {
           return (
             <Card
               className="cardpoke"
