@@ -8,9 +8,10 @@ import F1 from "../Images/F1.png";
 import F2 from "../Images/F2.png";
 import F3 from "../Images/F3.png";
 import F4 from "../Images/F4.png";
+import Navbar from "./Navbar";
 
-export default function Header({ activeUser, setActiveUser }) {
-  const [clicked, setIsClicked] = useState(false);
+export default function Header({ activeUser, setActiveUser, cartQuantity, openCart, closeCart, isOpen}) {
+const [clicked, setIsClicked] = useState(false);
 
   const clickProfile = () => {
     setIsClicked(!clicked);
@@ -24,8 +25,9 @@ export default function Header({ activeUser, setActiveUser }) {
   }
 
   return (
-    <div className="blueHeader GameBoyFont">
-      <div className="LogoDiv">
+   
+      <div className="blueHeader GameBoyFont">
+        <div className="LogoDiv">
         <img src={logo} alt="Pokemon logo" />
         <h2>Arena Fight</h2>
       </div>
@@ -46,6 +48,7 @@ export default function Header({ activeUser, setActiveUser }) {
           <p>Log Off</p>
         </button>
       )}
-    </div>
+        <Navbar cartQuantity={cartQuantity} openCart={openCart} closeCart={closeCart} isOpen={isOpen}/>
+      </div>
   );
 }

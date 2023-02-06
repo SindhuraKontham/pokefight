@@ -1,0 +1,17 @@
+.pokeball {
+    color: white;
+    width: 2rem; 
+    height: 2rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(-20%, 20%)
+}
+
+.text {
+    font-size: 1.5rem;
+}
+.nav {
+    /* background-color: rgb(26, 42, 87); */
+    padding: 0rem 0rem 0rem 20rem;
+}
