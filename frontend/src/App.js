@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-// import Pokemon from "./components/Pokemon";
+import FightArena from "./components/FightArena";
 import Header from "./components/Header";
 import User from "./components/User";
 import CreateNewUser from "./components/CreateNewUser";
@@ -17,6 +17,11 @@ function App() {
   const [cart, setCart] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [activeUser, setActiveUser] = useState([]);
+  const [pokemonsInfo, setPokemonsInfo] = useState([]);
+  const [randomPokemon, setRandomPokemon] = useState([]);
+  // const [pokemonsInfo, setPokemonsInfo] = useState([]);
+
+  console.log(pokemonsInfo)
 
   useEffect(() => {
     const data = async () => {
@@ -87,6 +92,9 @@ function App() {
                 setCart={setCart}
                 pokemons={pokemons}
                 setSearchResults={setSearchResults}
+                pokemonsInfo={pokemonsInfo}
+                setPokemonsInfo={setPokemonsInfo}
+                user={activeUser}
               />
             }
           />
@@ -104,6 +112,18 @@ function App() {
                 openCart={openCart}
                 closeCart={closeCart}
                 isOpen={isOpen}
+              />
+            }
+          />
+
+          <Route
+            path="/fightarena"
+            element={
+              <FightArena
+                pokemons={pokemons}
+                selectedPokemon={cart}
+                randomPokemon={randomPokemon}
+                setRandomPokemon={setRandomPokemon}
               />
             }
           />

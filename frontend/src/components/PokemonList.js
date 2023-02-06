@@ -1,12 +1,14 @@
-import React from 'react'
+import React from "react";
 import Card from "react-bootstrap/Card";
 import PokemonType from "./PokemonType";
-import Col from 'react-bootstrap/Col';
+import Col from "react-bootstrap/Col";
+import axios from "axios";
 
-function PokemonList({pokemonsInfo,cart,setCart}) {
-    console.log(pokemonsInfo)
-  return (<div>
-         <Col sm={8} className="cardmain">
+function PokemonList({ pokemonsInfo, cart, setCart, user }) {
+  console.log(user);
+  return (
+    <div>
+      <Col sm={8} className="cardmain">
         {pokemonsInfo.map((pokemon, index) => {
           return (
             <Card
@@ -31,8 +33,27 @@ function PokemonList({pokemonsInfo,cart,setCart}) {
                       image: `https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`,
                       name: pokemon.name,
                     });
-                    console.log(stateCopy);
                     setCart(stateCopy);
+
+                    // const post = {
+                    //   img:  `https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`,
+                    //   name: pokemon.name,
+                    // }
+
+                    // console.log(post)
+
+                    axios
+                      .post("http://localhost:3001/pokemonCart/", {
+                        img: `https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`,
+                        pokeName: pokemon.name,
+                        user: user.username,
+                      })
+                      .then(function (response) {
+                        console.log(response);
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
                   }}
                   className="title button"
                 >
@@ -45,7 +66,7 @@ function PokemonList({pokemonsInfo,cart,setCart}) {
         })}
       </Col>
     </div>
-  )
+  );
 }
 
-export default PokemonList
+export default PokemonList;

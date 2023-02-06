@@ -18,14 +18,14 @@ const getPokemon = (req, res) => {
   }
 };
 
-const getPokemonName = (req, res) => {
-  try {
-    const { name } = req.params;
-    res.json(jsonData[name]);
-  } catch (err) {
-    res.status(500).send("Something went wrong, Please try again later!!");
-  }
-};
+// const getPokemonName = (req, res) => {
+//   try {
+//     const { name } = req.params;
+//     res.json(jsonData[name]);
+//   } catch (err) {
+//     res.status(500).send("Something went wrong, Please try again later!!");
+//   }
+// };
 
 
 const getPokemonInfo = async (req, res) => {
@@ -41,16 +41,11 @@ const getPokemonInfo = async (req, res) => {
 
   const getPokemonNameInfo = async (req, res) => {
     try {
-        const { name ,info } = req.params;
-        // console.log(name)
-        if(info === "name") {
-         
-          res.json(jsonData[name].name )}
-        else if (info === "type"){
-          console.log(jsonData[0].name)
-          res.json(jsonData[name].type)}
-        else res.json(jsonData[name].base) 
-      } catch (err) {
+        const { name } = req.params;
+        const findOne = jsonData.filter( data => data.name.english.toLowerCase() === name.toLowerCase())
+          res.json(findOne[0].type)}
+      
+       catch (err) {
         res.status(500).send("Something!!");
       }
   };
@@ -58,7 +53,7 @@ const getPokemonInfo = async (req, res) => {
 module.exports = {
     getPokemons,
     getPokemon,
-    getPokemonName,
+    // getPokemonName,
     getPokemonInfo,
     getPokemonNameInfo,
 };
