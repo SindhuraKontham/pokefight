@@ -90,7 +90,11 @@ function PokemonInfo({ cart, setCart }) {
         </Link>
       </div> */}
       <Container>
-        <Search />
+        <Search  data={search(pokemonsInfo)}
+        handleSubmit={handleSubmit}
+        query={query}
+        setQuery={setQuery}
+        pokemonsInfo={pokemonsInfo}/>
         <Row>
         <Stack spacing={2}>
             <Pagination sx={{ color: purple[500] }}
