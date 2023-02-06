@@ -4,12 +4,18 @@ const { Schema } = mongoose;
 
 const pokeCartSchema = new Schema({
   // name, score, active
+
   image: {
     type: String,
     required: true,
   },
 
-  name: {
+  pokeName: {
+    type: String,
+    required: true,
+  },
+
+  user: {
     type: String,
     required: true,
   },
@@ -17,6 +23,7 @@ const pokeCartSchema = new Schema({
   type: {
     type: String,
   },
+  active: { type: Boolean, default: false},
 });
 
 module.exports = mongoose.model("PokeCart", pokeCartSchema);

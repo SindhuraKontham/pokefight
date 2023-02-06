@@ -8,24 +8,8 @@ import usePagination from "./Pagination";
 import PokemonList from "./PokemonList";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { createTheme } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
-import Search from "./Search";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: '#f44336',
-    },
-  },
-});
-
-
-function PokemonInfo({ cart, setCart }) {
-  const [pokemonsInfo, setPokemonsInfo] = useState([]);
+function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(6);
   const [loading, setLoading] = useState(false);
@@ -61,7 +45,6 @@ function PokemonInfo({ cart, setCart }) {
     _DATA.jump(p);
   };
 
-  console.log(currentRecords)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,17 +62,6 @@ function PokemonInfo({ cart, setCart }) {
 
   return (
     <div className="body">
-      {/* <div className="cart">
-        <Link to="/cart">
-          <img
-            className="pokeball"
-            src={Ball}
-            alt="pokeball"
-            width={70}
-            height={70}
-          ></img>
-        </Link>
-      </div> */}
       <Container>
         <Search  data={search(pokemonsInfo)}
         handleSubmit={handleSubmit}
@@ -98,13 +70,10 @@ function PokemonInfo({ cart, setCart }) {
         pokemonsInfo={pokemonsInfo}/>
         <Row>
         <Stack spacing={2}>
-            <Pagination sx={{ color: purple[500] }}
+            <Pagination 
             className="pagination"
               count={nPages}
               onChange={handleChange}
-              // variant="outlined"
-              // shape="rounded"
-              // color="primary"
             />
           </Stack>
           {loading ? (
@@ -120,16 +89,10 @@ function PokemonInfo({ cart, setCart }) {
               pokemonsInfo={currentRecords}
               cart={cart}
               setCart={setCart}
+              user = {user}
               query={query}
             />
           )}
-
-          {/* <Pagination
-    nPages = { nPages }
-    currentPage = { currentPage } 
-    setCurrentPage = { setCurrentPage }
-/> */}
-
       
           {/* <Col sm={2}>
           <img src={ProfilePic1}/>
