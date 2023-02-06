@@ -22,10 +22,10 @@ export default function Navbar({ cartQuantity}) {
             Home
           </Nav.Link>
           <Nav.Link to={"/pokemons"} as={NavLink} className="text">
-            Pokemons List
+            List
           </Nav.Link>
           <Nav.Link to={"/cart"} as={NavLink} className="text">
-            Yours Pokemons
+            Cart
           </Nav.Link>
         </Nav>
 

@@ -68,7 +68,7 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<User />} />
-          <Route path="/CreateUser" element={<CreateNewUser setActiveUser={setActiveUser} } />
+          <Route path="/CreateUser" element={<CreateNewUser setActiveUser={setActiveUser}/>}/>
           <Route
             path="/pokemons"
             element={
