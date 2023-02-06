@@ -1,3 +1,3 @@
+require('dotenv').config()
 const mongoose = require("mongoose");
-
-mongoose.connect("mongodb+srv://sofiarosa:Mimzyleotito@sofiascluster.oumdsc1.mongodb.net/Pokemon")
+mongoose.connect(process.env.MONGOKEY_USERS)
