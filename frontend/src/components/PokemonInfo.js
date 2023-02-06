@@ -10,6 +10,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { createTheme } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
+import Search from "./Search";
 
 const theme = createTheme({
   palette: {
@@ -23,12 +24,14 @@ const theme = createTheme({
 });
 
 
-
 function PokemonInfo({ cart, setCart }) {
   const [pokemonsInfo, setPokemonsInfo] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(6);
   const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const pokRef = useRef();
+ 
 
   useEffect(() => {
     setLoading(true);
@@ -60,6 +63,20 @@ function PokemonInfo({ cart, setCart }) {
 
   console.log(currentRecords)
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const item = e.target.newItem.value;
+    if (!item) {
+      return setPokemonsInfo();
+    }
+    if (item) setPokemonsInfo([...pokemonsInfo, item]);
+    e.target.reset();
+  };
+
+  const search = (data) => {
+    return data.filter((item) => item.name.toLowerCase().includes(query));
+  };
+
   return (
     <div className="body">
       {/* <div className="cart">
@@ -74,6 +91,11 @@ function PokemonInfo({ cart, setCart }) {
         </Link>
       </div> */}
       <Container>
+        <Search  data={search(pokemonsInfo)}
+        handleSubmit={handleSubmit}
+        query={query}
+        setQuery={setQuery}
+        pokemonsInfo={pokemonsInfo}/>
         <Row>
         <Stack spacing={2}>
             <Pagination sx={{ color: purple[500] }}
@@ -98,6 +120,7 @@ function PokemonInfo({ cart, setCart }) {
               pokemonsInfo={currentRecords}
               cart={cart}
               setCart={setCart}
+              query={query}
             />
           )}
 

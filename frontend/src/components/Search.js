@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import style from "./search.css";
+import "./search.css";
 import PokemonInfo from "./PokemonInfo";
 // import { pokemons, setSearchResults } from "../App";
 
 export default function Search({
   handleSubmit,
   setQuery,
-  pokeInfo,
+  pokemonsInfo,
 }) {
   
   console.log(
-    pokeInfo.filter((pokemon) => pokemon.name.toLowerCase().includes("saur"))
+    pokemonsInfo.filter((pokemon) => pokemon.name.toLowerCase().includes("saur"))
   );
 
   return (
