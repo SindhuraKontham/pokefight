@@ -13,12 +13,12 @@ import PokemonInfo from "./components/PokemonInfo";
 
 function App() {
   const [pokemons, setPokemons] = useState([]); // eslint-disable-next-line
-  const [setSearch, setSearchResults] = useState([]); 
+  const [setSearch, setSearchResults] = useState([]);
   const [cart, setCart] = useState([]);
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [activeUser, setActiveUser] = useState([]);
-  
-   useEffect(() => {
+
+  useEffect(() => {
     const data = async () => {
       try {
         const response = await axios.get("http://localhost:3001/users/active");
@@ -50,24 +50,35 @@ function App() {
   //       console.log(err);
   //     });
   // }, []);
-   
-    const cartQuantity = cart.reduce((quantity, item) => item.quantity + quantity, 1)
 
-    const openCart = () => {
-      setIsOpen(true)
-    }
-    const closeCart = () => {
-      setIsOpen(false)
-    }
+  const cartQuantity = cart.reduce(
+    (quantity, item) => item.quantity + quantity,
+    1
+  );
 
+  const openCart = () => {
+    setIsOpen(true);
+  };
+  const closeCart = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
-      <Header cartQuantity={cartQuantity} openCart={openCart} closeCart={closeCart}  />
+      <Header
+        activeUser={activeUser}
+        setActiveUser={setActiveUser}
+        cartQuantity={cartQuantity}
+        openCart={openCart}
+        closeCart={closeCart}
+      />
       <Container>
         <Routes>
-          <Route path="/" element={<User />} />
-          <Route path="/CreateUser" element={<CreateNewUser setActiveUser={setActiveUser}/>}/>
+          <Route path="/" element={<User setActiveUser={setActiveUser} />} />
+          <Route
+            path="/CreateUser"
+            element={<CreateNewUser setActiveUser={setActiveUser} />}
+          />
           <Route
             path="/pokemons"
             element={
@@ -85,12 +96,20 @@ function App() {
           /> */}
           <Route
             path="/cart"
-            element={<PokeCart cart={cart} setCart={setCart} cartQuantity={cartQuantity} openCart={openCart} closeCart={closeCart} isOpen={isOpen} />}
+            element={
+              <PokeCart
+                cart={cart}
+                setCart={setCart}
+                cartQuantity={cartQuantity}
+                openCart={openCart}
+                closeCart={closeCart}
+                isOpen={isOpen}
+              />
+            }
           />
         </Routes>
       </Container>
     </>
-
   );
 }
 
