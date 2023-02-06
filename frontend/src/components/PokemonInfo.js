@@ -8,6 +8,7 @@ import usePagination from "./Pagination";
 import PokemonList from "./PokemonList";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import Search from "../components/Search"
 
 function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
   const [currentPage, setCurrentPage] = useState(1);
