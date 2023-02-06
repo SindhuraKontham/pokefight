@@ -23,12 +23,14 @@ const theme = createTheme({
 });
 
 
-
 function PokemonInfo({ cart, setCart }) {
   const [pokemonsInfo, setPokemonsInfo] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(6);
   const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const pokRef = useRef();
+ 
 
   useEffect(() => {
     setLoading(true);
