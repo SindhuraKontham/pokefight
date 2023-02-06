@@ -4,7 +4,6 @@ import './pokemoninfo.css';
 import cross from "./icons/cross.png";
 
 export default function PokeCart({ cart, setCart }) {
-  console.log(cart);
 
   const handleOnClick = () => {
     const stateCopy = cart.slice();

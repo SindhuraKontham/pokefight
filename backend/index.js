@@ -1,8 +1,11 @@
+require("./db");
 const dotenv = require("dotenv");
 dotenv.config();
 
 const express = require("express");
 const {pokemonRouter} = require("./router/pokemon")
+const { userRouter } = require("./router/users");
+
 var cors = require('cors')
 
 const app = express();
@@ -10,6 +13,7 @@ app.use(cors())
 app.use(express.json());
 
 app.use("/pokemon", pokemonRouter)
+app.use("/users", userRouter);
 
 const PORT = 3001;
 

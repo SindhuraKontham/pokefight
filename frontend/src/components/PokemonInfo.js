@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./pokemoninfo.css";
@@ -35,7 +35,9 @@ function PokemonInfo({ cart, setCart }) {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=15&offset=0")
       .then((response) => {
+
         setPokemonsInfo(response.data.results);
+        // setQuery(response.data.results);
         setLoading(false);
       })
       .catch((error) => {
@@ -111,6 +113,7 @@ function PokemonInfo({ cart, setCart }) {
       </Col> */}
         </Row>
       </Container>
+
     </div>
   );
 }
