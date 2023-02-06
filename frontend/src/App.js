@@ -56,7 +56,6 @@ function App() {
     const openCart = () => {
       setIsOpen(true)
     }
-
     const closeCart = () => {
       setIsOpen(false)
     }

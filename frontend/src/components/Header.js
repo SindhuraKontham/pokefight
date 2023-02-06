@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { FaPowerOff } from "react-icons/fa";
 import axios from "axios";
 import logo from "../Images/logo.png";
+import Ball from "./icons/pokemonball.png";
+import { Link } from "react-router-dom";
 import F0 from "../Images/F0.png";
 import F1 from "../Images/F1.png";
 import F2 from "../Images/F2.png";
@@ -24,8 +26,8 @@ const [clicked, setIsClicked] = useState(false);
     });
   }
 
+
   return (
-   
       <div className="blueHeader GameBoyFont">
         <div className="LogoDiv">
         <img src={logo} alt="Pokemon logo" />
@@ -48,6 +50,17 @@ const [clicked, setIsClicked] = useState(false);
           <p>Log Off</p>
         </button>
       )}
+        
+         <Link to="/cart">
+       <img
+         className="pokeball"
+         src={Ball}
+         alt="pokeball"
+         width={70}
+         height={70}
+       ></img>
+     </Link>
+      
         <Navbar cartQuantity={cartQuantity} openCart={openCart} closeCart={closeCart} isOpen={isOpen}/>
       </div>
   );
