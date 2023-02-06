@@ -7,7 +7,9 @@ function PokemonList({pokemonsInfo,cart,setCart}) {
     console.log(pokemonsInfo)
   return (<div>
          <Col sm={8} className="cardmain">
-        {pokemonsInfo.map((pokemon, index) => {
+        {pokemonsInfo
+        .filter
+        .map((pokemon, index) => {
           return (
             <Card
               className="cardpoke"

@@ -10,6 +10,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { createTheme } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
+import Search from "./Search";
 
 const theme = createTheme({
   palette: {
