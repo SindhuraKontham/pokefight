@@ -90,6 +90,7 @@ function PokemonInfo({ cart, setCart }) {
         </Link>
       </div> */}
       <Container>
+        <Search />
         <Row>
         <Stack spacing={2}>
             <Pagination sx={{ color: purple[500] }}
