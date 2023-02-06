@@ -12,8 +12,15 @@ import F3 from "../Images/F3.png";
 import F4 from "../Images/F4.png";
 import Navbar from "./Navbar";
 
-export default function Header({ activeUser, setActiveUser, cartQuantity, openCart, closeCart, isOpen}) {
-const [clicked, setIsClicked] = useState(false);
+export default function Header({
+  activeUser,
+  setActiveUser,
+  cartQuantity,
+  openCart,
+  closeCart,
+  isOpen,
+}) {
+  const [clicked, setIsClicked] = useState(false);
 
   const clickProfile = () => {
     setIsClicked(!clicked);
@@ -26,13 +33,19 @@ const [clicked, setIsClicked] = useState(false);
     });
   }
 
-
   return (
-      <div className="blueHeader GameBoyFont">
-        <div className="LogoDiv">
+    <div className="blueHeader GameBoyFont">
+      <div className="LogoDiv">
         <img src={logo} alt="Pokemon logo" />
         <h2>Arena Fight</h2>
       </div>
+
+      {/* <Navbar
+        cartQuantity={cartQuantity}
+        openCart={openCart}
+        closeCart={closeCart}
+        isOpen={isOpen}
+      /> */}
       {activeUser != null && (
         <button className="userDescription" onClick={clickProfile}>
           {activeUser.img === 0 && <img src={F0} className="facePic" />}
@@ -50,18 +63,18 @@ const [clicked, setIsClicked] = useState(false);
           <p>Log Off</p>
         </button>
       )}
-        
-         <Link to="/cart">
-       <img
-         className="pokeball"
-         src={Ball}
-         alt="pokeball"
-         width={70}
-         height={70}
-       ></img>
-     </Link>
+
+      <Link to="/cart">
+        <img
+          className="pokeball"
+          src={Ball}
+          alt="pokeball"
+          width={70}
+          height={70}
+        ></img>
+      </Link>
+
       
-        <Navbar cartQuantity={cartQuantity} openCart={openCart} closeCart={closeCart} isOpen={isOpen}/>
-      </div>
+    </div>
   );
 }

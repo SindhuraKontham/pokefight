@@ -3,12 +3,12 @@ import Card from "react-bootstrap/Card";
 import PokemonType from "./PokemonType";
 import Col from 'react-bootstrap/Col';
 
-function PokemonList({pokemonsInfo,cart,setCart}) {
+function PokemonList({pokemonsInfo,cart,setCart, query}) {
     console.log(pokemonsInfo)
   return (<div>
          <Col sm={8} className="cardmain">
         {pokemonsInfo
-        .filter
+        .filter((pokemon) => pokemon.name.toLowerCase().includes(query))
         .map((pokemon, index) => {
           return (
             <Card

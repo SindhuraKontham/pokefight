@@ -9,9 +9,10 @@
 }
 
 .text {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+    font-family: "Press Start 2P", cursive;
 }
 .nav {
-    /* background-color: rgb(26, 42, 87); */
-    padding: 0rem 0rem 0rem 20rem;
+    background-color: rgb(26, 42, 87);
+    padding: 0rem 15rem 0rem 30rem;
 }

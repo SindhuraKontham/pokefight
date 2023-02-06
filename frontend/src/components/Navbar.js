@@ -4,7 +4,7 @@ import Pokeball from "./images/pokeball.png";
 import "./navbar.css";
 import { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
-import CartItem from "./CartItem"
+// import CartItem from "./CartItem"
 
 export default function Navbar({ cartQuantity}) {
   const [show, setShow] = useState(false);

@@ -120,6 +120,7 @@ function PokemonInfo({ cart, setCart }) {
               pokemonsInfo={currentRecords}
               cart={cart}
               setCart={setCart}
+              query={query}
             />
           )}
 
