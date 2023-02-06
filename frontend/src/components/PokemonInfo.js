@@ -62,6 +62,20 @@ function PokemonInfo({ cart, setCart }) {
 
   console.log(currentRecords)
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const item = e.target.newItem.value;
+    if (!item) {
+      return setPokemonsInfo();
+    }
+    if (item) setPokemonsInfo([...pokemonsInfo, item]);
+    e.target.reset();
+  };
+
+  const search = (data) => {
+    return data.filter((item) => item.name.toLowerCase().includes(query));
+  };
+
   return (
     <div className="body">
       {/* <div className="cart">
