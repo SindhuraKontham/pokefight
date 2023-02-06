@@ -54,8 +54,8 @@ function App() {
         <Route path="/cart" element={<PokeCart cart={cart} setCart={setCart} />} />
       </Routes>
       {/* to be children of sindhuras component in new Route:"/" */}
-      <Search pokemons={pokemons} setSearchResults={setSearchResults} />
-      <ListPage searchResults={searchResults} />
+      {/* <Search pokemons={pokemons} setSearchResults={setSearchResults} /> */}
+      {/* <ListPage searchResults={searchResults} /> */}
 
     </div>
   );

@@ -24,12 +24,15 @@ import "./pokemoninfo.css";
 
 
 function PokemonType({ id, name }) {
+  console.log(id)
   const [pokemonData, setPokemonData] = useState([]);
-  const url = `http://localhost:8034/pokemon/${id}/type`;
+  const url = `http://localhost:3001/pokemon/${name}/type`;
+  console.log(url)
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
+        console.log(response.data)
         setPokemonData(response.data);
       })
       .catch((error) => {
