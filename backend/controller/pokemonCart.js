@@ -2,7 +2,7 @@ const Pokemon = require("../model/PokeCart");
 
 const createPokemon = async (req, res) => {
     const { img, pokeName, user  } = req.body;
-    // console.log(req.body)
+    //console.log(req.body)
     try {
       const pokemon = await Pokemon.create({  image:img, pokeName:pokeName, user:user });
       res.status(201).json(pokemon);
@@ -14,7 +14,9 @@ const createPokemon = async (req, res) => {
 
   const getPokemon = async (req, res) => {
     try {
-      const pokemon = await Pokemon.find({});
+      const { user  } = req.params;
+      console.log(user)
+      const pokemon = await Pokemon.find({ user : user , active : true});
       res.json(pokemon);
     } catch (error) {
       res.status(500).send(error.messages);
