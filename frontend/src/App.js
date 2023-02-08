@@ -11,6 +11,7 @@ import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
 import PokemonInfo from "./components/PokemonInfo";
 import Navbar from "./components/Navbar";
+import Fight from "./components/Fight";
 
 function App() {
   const [pokemons, setPokemons] = useState([]); // eslint-disable-next-line
@@ -22,7 +23,7 @@ function App() {
   const [randomPokemon, setRandomPokemon] = useState([]);
   // const [pokemonsInfo, setPokemonsInfo] = useState([]);
 
-  console.log(pokemonsInfo)
+  // console.log(pokemonsInfo);
 
   useEffect(() => {
     const data = async () => {
@@ -31,7 +32,8 @@ function App() {
         const res = response.data;
         setActiveUser(res);
         setPokemons(res);
-        console.log(res);
+        // console.log(res);
+        // console.log(activeUser);
         return res;
       } catch (err) {
         console.log(err);
@@ -87,6 +89,8 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<User setActiveUser={setActiveUser} />} />
+
+          <Route path="/Fight" element={<Fight activeUser={activeUser} />} />
           <Route
             path="/CreateUser"
             element={<CreateNewUser setActiveUser={setActiveUser} />}
