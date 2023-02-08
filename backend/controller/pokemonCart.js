@@ -14,7 +14,9 @@ const createPokemon = async (req, res) => {
 
   const getPokemon = async (req, res) => {
     try {
-      const pokemon = await Pokemon.find({});
+      const { user  } = req.params;
+      console.log(user)
+      const pokemon = await Pokemon.find({ user : user , active : true});
       res.json(pokemon);
     } catch (error) {
       res.status(500).send(error.messages);
