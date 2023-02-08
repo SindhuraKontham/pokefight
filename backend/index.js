@@ -6,6 +6,7 @@ const express = require("express");
 const {pokemonRouter} = require("./router/pokemon")
 const {pokemonCartRouter} = require("./router/pokemonCart")
 const { userRouter } = require("./router/users");
+const { fightRouter } = require("./router/fight");
 
 var cors = require('cors')
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/pokemon", pokemonRouter)
 app.use("/pokemonCart", pokemonCartRouter)
 app.use("/users", userRouter);
+app.use("/fight", fightRouter);
 
 const PORT = 3001;
 
