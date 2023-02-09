@@ -45,10 +45,8 @@ function App() {
   }, []);
   console.log(cart);
 
-  const cartQuantity = cart.reduce(
-    (quantity, item) => item.quantity + quantity,
-    1
-  );
+  const cartQuantity = cart.length
+ 
 
   const openCart = () => {
     setIsOpen(true);
@@ -56,6 +54,8 @@ function App() {
   const closeCart = () => {
     setIsOpen(false);
   };
+
+  const quantity = cart.length
 
   return (
     <>

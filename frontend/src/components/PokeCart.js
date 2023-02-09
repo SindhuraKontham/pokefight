@@ -5,6 +5,8 @@ import cross from "./icons/cross.png";
 
 export default function PokeCart({ cart, setCart }) {
 
+console.log(cart)
+
   const handleOnClick = () => {
     const stateCopy = cart.slice();
     let index = stateCopy.findIndex((x) => x.cart === cart.cart);
