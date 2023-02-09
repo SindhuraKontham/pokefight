@@ -3,6 +3,8 @@ import Card from "react-bootstrap/Card";
 import PokemonType from "./PokemonType";
 import axios from "axios";
 import Pokemon from "./Pokemon";
+import "./pokemoninfo.css"
+// import Button from "./Button";
 
 export default function NewComponent({
   pokemon,
@@ -16,7 +18,7 @@ export default function NewComponent({
 }) {
   const [btnState, setBtnState] = useState(false);
 
-  const handleOnclick = () => {
+  const handleOnClick = () => {
     setClick(!click);
   };
 
@@ -28,7 +30,7 @@ export default function NewComponent({
 
   return (
     <>
-      {quantity > 5 ? (
+      {quantity > 4 ? (
         <Card
           className="cardpoke"
           border="primary"
@@ -67,6 +69,9 @@ export default function NewComponent({
               <br /> {pokemon.name}
             </Card.Title>
             <Pokemon url={pokemon.url} />
+            {/* <Button url={pokemon.url} btnState={btnState} cart={cart} pokemon={pokemon} setCart={setCart} setActive={setActive} user={user} handleOnClick={handleOnClick} /> */}
+            
+
             {!btnState ? (
               <>
                 <button
@@ -108,13 +113,13 @@ export default function NewComponent({
                   {" "}
                   Add
                 </button>
-                <button onClick={handleOnclick} className="button more">
+                <button onClick={handleOnClick} className="button more">
                   More
                 </button>
               </>
             ) : (
               <>
-                <button className="title remove"> Remove</button>
+                <button className="button remove"> Remove</button>
                 <button className="button more">More</button>
               </>
             )}
