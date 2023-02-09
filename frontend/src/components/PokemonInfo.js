@@ -33,7 +33,7 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiv
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [currentPage]);
 
   const getPokemonInfo = async (response) => {
     response.map(async (item) => {

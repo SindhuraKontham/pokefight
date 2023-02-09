@@ -2,9 +2,9 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import NewComponent from "./NewComponent";
 import Col from "react-bootstrap/Col";
-import axios from "axios";
-import { useEffect, useState } from "react";
-
+// import axios from "axios";
+import pokedex from "./pokedex.json";
+// import { useEffect, useState } from "react";
 
 function PokemonList({ pokemonsInfo, cart, setCart, query, user }) {
   return (
