@@ -5,8 +5,57 @@ import axios from 'axios';
 import pokedex from "./pokedex.json";
 
 export default function NewComponent({pokemon, index, cart, setCart, user, pokedex }) {
-    const [] =useState()
+    const [btnState, setBtnState] =useState(false)
+   
+    
+    const setActive = () => {
+        setBtnState(!btnState);
+    }
+
+
+    const quantity = cart.length;
+
     return(
+        <>
+        {btnState ? (
+            <Card
+            className="cardpoke"
+            border="primary"
+            style={{ width: "13rem", height: "17rem" }}
+          >
+            <PokemonType id={index} name={pokemon.name} />
+            <Card.Img
+              variant="top"
+              src={`https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`}
+              className="cardImage"
+            />
+            <Card.Body>
+              <Card.Title className="title">
+                <br /> {pokemon.name}
+              </Card.Title>
+            {quantity < 5 ? (
+            <>
+            <button className="button remove"
+              >
+                {" "}
+                Remove
+              </button>
+              <button className="button more">More</button>
+            </>
+
+            ) : (
+                    <>
+                    <button className="button full">Full, check your cart to remove or edit </button>
+                   </>
+
+            )}
+              
+            </Card.Body>
+          </Card>
+
+
+        ) : (
+
         <Card
                 className="cardpoke"
                 border="primary"
@@ -22,8 +71,9 @@ export default function NewComponent({pokemon, index, cart, setCart, user, poked
                   <Card.Title className="title">
                     <br /> {pokemon.name}
                   </Card.Title>
-
-                  <button
+                {quantity < 5 ? (
+                <>
+                <button
                     onClick={() => {
                       const stateCopy = cart.slice();
                       stateCopy.push({
@@ -31,7 +81,7 @@ export default function NewComponent({pokemon, index, cart, setCart, user, poked
                         name: pokemon.name,
                       });
                       setCart(stateCopy);
-
+                      setActive();
                       // const post = {
                       //   img:  `https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`,
                       //   name: pokemon.name,
@@ -63,8 +113,27 @@ export default function NewComponent({pokemon, index, cart, setCart, user, poked
                     Add
                   </button>
                   <button className="button more">More</button>
+                </>
+
+                ) : (
+                    <>
+                    <button className="button full">Full, check your cart to remove or edit </button>
+                   </>
+    
+                )}
+                  
                 </Card.Body>
               </Card>
 
+
+
+
+
+
+
+
+        )}
+        
+        </>
     )
 }

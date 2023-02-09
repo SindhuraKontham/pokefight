@@ -60,7 +60,7 @@
 .title {
   font-family: "Aboreto", cursive;
   font-size: large;
-  font-weight: bold;
+  font-weight: bolder;
   /* mix-blend-mode: multiply; */
 }
 
@@ -68,6 +68,9 @@
   border-radius: 1rem;
   background-color: #deb66c;
   padding: 5px;
+  font-family: "Press Start 2P", cursive;
+  font-size: 12px;
+  font-weight: light;
   /* mix-blend-mode: multiply; */
   /* cursor: pointer; */
 }
@@ -96,22 +99,21 @@
 }
 
 .more {
-  font-family: "Aboreto", cursive;
-  font-size: large;
-  font-weight: bold;
+  background-color: rgb(161, 159, 159);
+  font-size: 12px;
+  font-family: "Press Start 2P", cursive;
   background-color: rgba(49, 175, 133, 0.766);
 }
 
 .remove {
   font-family: "Aboreto", cursive;
-  font-size: large;
-  font-weight: bold;
+  font-size: 12px;
   background-color: rgb(249, 77, 77);
+  font-family: "Press Start 2P", cursive;
 }
 
 .full {
-  font-family: "Aboreto", cursive;
-  font-size: large;
-  font-weight: bold;
   background-color: rgb(161, 159, 159);
+  font-size: 10px;
+  font-family: "Press Start 2P", cursive;
 }
