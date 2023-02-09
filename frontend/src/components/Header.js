@@ -1,21 +1,16 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaPowerOff } from "react-icons/fa";
 import axios from "axios";
 import logo from "../Images/logo.png";
-import Ball from "./icons/pokemonball.png";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import F0 from "../Images/F0.png";
 import F1 from "../Images/F1.png";
 import F2 from "../Images/F2.png";
 import F3 from "../Images/F3.png";
 import F4 from "../Images/F4.png";
-import Navbar from "./Navbar";
 
-export default function Header({
-  activeUser,
-  setActiveUser,
-}) {
+export default function Header({ activeUser, setActiveUser }) {
   const [clicked, setIsClicked] = useState(false);
 
   const clickProfile = () => {
@@ -35,13 +30,6 @@ export default function Header({
         <img src={logo} alt="Pokemon logo" />
         <h2>Arena Fight</h2>
       </div>
-
-      {/* <Navbar
-        cartQuantity={cartQuantity}
-        openCart={openCart}
-        closeCart={closeCart}
-        isOpen={isOpen}
-      /> */}
       {activeUser != null && (
         <button className="userDescription" onClick={clickProfile}>
           {activeUser.img === 0 && <img src={F0} className="facePic" />}
@@ -53,24 +41,24 @@ export default function Header({
         </button>
       )}
       {clicked && (
-        <button className="LogOffButton" onClick={LogOff}>
-          &nbsp;
-          <FaPowerOff />
-          <p>Log Off</p>
-        </button>
+        <div>
+          <button className="LogOffButton" onClick={LogOff}>
+            &nbsp;
+            <FaPowerOff />
+            <p>Log Off</p>
+          </button>{" "}
+          <NavLink to={"/"} className="text">
+            <button className="ChangeUserButton" onClick={LogOff}>
+              <p>Change user</p>
+            </button>
+          </NavLink>
+          <NavLink to={"/CreateUser"} className="text">
+            <button className="CreateUserButton" onClick={LogOff}>
+              <p>Create new user</p>
+            </button>
+          </NavLink>
+        </div>
       )}
-
-      {/* <Link to="/cart">
-        <img
-          className="pokeball"
-          src={Ball}
-          alt="pokeball"
-          width={70}
-          height={70}
-        ></img>
-      </Link> */}
-
-      
     </div>
   );
 }
