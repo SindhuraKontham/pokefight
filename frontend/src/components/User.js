@@ -9,8 +9,9 @@ import F1 from "../Images/F1.png";
 import F2 from "../Images/F2.png";
 import F3 from "../Images/F3.png";
 import F4 from "../Images/F4.png";
+import Header from "../components/Header";
 
-export default function User({ setActiveUser }) {
+export default function User({ setActiveUser,activeUser }) {
   const [user, setUser] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -37,6 +38,11 @@ export default function User({ setActiveUser }) {
   };
 
   return (
+    <div>
+       <Header
+        activeUser={activeUser}
+        setActiveUser={setActiveUser}
+      />
     <div className="mt-5">
       <h2 className="User GameBoyFont">Welcome to Pokemon Arena Fight!</h2>
       <h4 className="User GameBoyFont">Let's sign you in </h4>
@@ -134,6 +140,7 @@ export default function User({ setActiveUser }) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

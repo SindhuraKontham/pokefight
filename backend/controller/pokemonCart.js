@@ -12,6 +12,15 @@ const createPokemon = async (req, res) => {
     }
   };
 
+  const getPokemons = async (req, res) => {
+    try {
+      const pokemon = await Pokemon.find({ });
+      res.json(pokemon);
+    } catch (error) {
+      res.status(500).send(error.messages);
+    }
+  };
+
   const getPokemon = async (req, res) => {
     try {
       const { user  } = req.params;
@@ -47,6 +56,7 @@ const createPokemon = async (req, res) => {
   module.exports = {
 
     createPokemon,
+    getPokemons,
     getPokemon,
     getActivePokemon,
     deletePokemon,

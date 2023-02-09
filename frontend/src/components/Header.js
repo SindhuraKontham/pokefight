@@ -15,10 +15,6 @@ import Navbar from "./Navbar";
 export default function Header({
   activeUser,
   setActiveUser,
-  cartQuantity,
-  openCart,
-  closeCart,
-  isOpen,
 }) {
   const [clicked, setIsClicked] = useState(false);
 

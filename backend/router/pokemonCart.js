@@ -3,6 +3,7 @@ const express = require("express");
 const {
  
   createPokemon,
+  getPokemons,
   getPokemon,
   getActivePokemon,
   deletePokemon,
@@ -13,6 +14,7 @@ const pokemonCartRouter = express.Router();
 
 
 pokemonCartRouter.post("/", createPokemon);
+pokemonCartRouter.get("/", getPokemons);
 pokemonCartRouter.get("/:user", getPokemon);
 pokemonCartRouter.get("/active", getActivePokemon);
 pokemonCartRouter.put("/:name", deletePokemon);

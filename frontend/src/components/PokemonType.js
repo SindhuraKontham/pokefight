@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "react-bootstrap/Card";
 import "./pokemonType.css";
 import axios from "axios";
@@ -21,8 +21,12 @@ import rock from "./icons/rock.svg";
 import steel from "./icons/steel.svg";
 import water from "./icons/water.svg";
 import "./pokemoninfo.css";
+import Overlay from "react-bootstrap/Overlay";
+import Tooltip from "react-bootstrap/Tooltip";
 
-function PokemonType({ id, name}) {
+function PokemonType({ id, name }) {
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
 
   const [pokemonData, setPokemonData] = useState([]);
   const url = `http://localhost:3001/pokemon/type/${name}`;
@@ -45,75 +49,291 @@ function PokemonType({ id, name}) {
           <div className="poke0">
             {pokemonData[0] === "Grass" ? (
               <div className="icon grass">
-                <img src={grass} alt="grass" />
+                <img
+                  src={grass}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Dark" ? (
               <div className="icon dark">
-                <img src={Dark} />
+                <img
+                  src={Dark}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Dragon" ? (
               <div className="icon dragon">
-                <img src={dragon} />
+                <img
+                  src={dragon}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Electric" ? (
               <div className="icon electric">
-                <img src={electric} />
+                <img
+                  src={electric}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Fairy" ? (
               <div className="icon dark">
-                <img src={fairy} />
+                <img
+                  src={fairy}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Fighting" ? (
               <div className="icon Fighting">
-                <img src={fighting} />
+                <img
+                  src={fighting}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Fire" ? (
               <div className="icon fire">
-                <img src={fire} />
+                <img
+                  src={fire}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Flying" ? (
               <div className="icon flying">
-                <img src={flying} />
+                <img
+                  src={flying}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Ghost" ? (
               <div className="icon ghost">
-                <img src={ghost} />
+                <img
+                  src={ghost}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Ground" ? (
               <div className="icon ground">
-                <img src={ground} />
+                <img
+                  src={ground}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Ice" ? (
               <div className="icon ice">
-                <img src={ice} />
+                <img
+                  src={ice}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Normal" ? (
               <div className="icon normal">
-                <img src={normal} />
+                <img
+                  src={normal}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Poison" ? (
               <div className="icon poison">
-                <img src={poison} />
+                <img
+                  src={poison}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Psychic" ? (
               <div className="icon psychic">
-                <img src={psychic} />
+                <img
+                  src={psychic}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Rock" ? (
               <div className="icon rock">
-                <img src={rock} />
+                <img
+                  src={rock}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Steel" ? (
               <div className="icon steel">
-                <img src={steel} />
+                <img
+                  src={steel}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Water" ? (
               <div className="icon water">
-                <img src={water} />
+                <img
+                  src={water}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[0] === "Bug" ? (
               <div className="icon bug">
-                <img src={Bug} />
+                <img
+                  src={Bug}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[0]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : (
               ""
@@ -122,71 +342,273 @@ function PokemonType({ id, name}) {
           <div className="poke1">
             {pokemonData[1] === "Grass" ? (
               <div className="icon grass">
-                <img src={grass} />
+                <img
+                  src={grass}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}></Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Dark" ? (
               <div className="icon dark">
-                <img src={Dark} />
+                <img
+                  src={Dark}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Dragon" ? (
               <div className="icon dragon">
-                <img src={dragon} />
+                <img
+                  src={dragon}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Electric" ? (
               <div className="icon electric">
-                <img src={electric} />
+                <img
+                  src={electric}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Fairy" ? (
               <div className="icon dark">
-                <img src={fairy} />
+                <img
+                  src={fairy}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Fighting" ? (
               <div className="icon Fighting">
-                <img src={fighting} />
+                <img
+                  src={fighting}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Fire" ? (
               <div className="icon fire">
-                <img src={fire} />
+                <img
+                  src={fire}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Flying" ? (
               <div className="icon flying">
-                <img src={flying} />
+                <img
+                  src={flying}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Ghost" ? (
               <div className="icon ghost">
-                <img src={ghost} />
+                <img
+                  src={ghost}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Ground" ? (
               <div className="icon ground">
-                <img src={ground} />
+                <img
+                  src={ground}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Ice" ? (
               <div className="icon ice">
-                <img src={ice} />
+                <img
+                  src={ice}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Normal" ? (
               <div className="icon normal">
-                <img src={normal} />
+                <img
+                  src={normal}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Poison" ? (
               <div className="icon poison">
-                <img src={poison} />
+                <img
+                  src={poison}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Psychic" ? (
               <div className="icon psychic">
-                <img src={psychic} />
+                <img
+                  src={psychic}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Rock" ? (
               <div className="icon rock">
-                <img src={rock} />
+                <img
+                  src={rock}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Steel" ? (
               <div className="icon steel">
-                <img src={steel} />
+                <img
+                  src={steel}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : pokemonData[1] === "Water" ? (
               <div className="icon water">
-                <img src={water} />
+                <img
+                  src={water}
+                  alt="grass "
+                  ref={target}
+                  onClick={() => setShow(!show)}
+                />{" "}
+                <Overlay target={target.current} show={show} placement="right">
+                  {(props) => (
+                    <Tooltip id="overlay-example" {...props}>
+                      {pokemonData[1]}
+                    </Tooltip>
+                  )}
+                </Overlay>
               </div>
             ) : (
               ""

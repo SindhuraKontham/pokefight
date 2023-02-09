@@ -3,9 +3,12 @@ import PokemonType from "./PokemonType";
 import { Col, Row, Card } from "react-bootstrap";
 import NewComponent from "./NewComponent";
 import pokedex from "./pokedex.json";
+import { useEffect, useState } from "react";
+import Pokemon from "./Pokemon";
 
 
 function PokemonList({ pokemonsInfo, cart, setCart, query, user }) {
+
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
 

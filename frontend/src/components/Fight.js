@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import pokedex from "./pokedex.json";
+import "./fightarena.css";
 
 export default function Fight({ activeUser }) {
   const [playerPokemonsId, setPlayerPokemonsId] = useState([]);
@@ -10,39 +11,24 @@ export default function Fight({ activeUser }) {
   const [playerPokemon3, setPlayerPokemon3] = useState(2);
   const [playerPokemon4, setPlayerPokemon4] = useState(3);
   const [playerPokemon5, setPlayerPokemon5] = useState(4);
+
+  const [imagePokemon1, setImagePokemon1] = useState("");
+  const [imagePokemon2, setImagePokemon2] = useState("");
+  const [imagePokemon3, setImagePokemon3] = useState("");
+  const [imagePokemon4, setImagePokemon4] = useState("");
+  const [imagePokemon5, setImagePokemon5] = useState("");
   const [pcPokemonId, setPcPokemonId] = useState([0, 1, 2, 3, 4]);
-  //   Get Request to the pokemon cart:
 
-  useEffect(() => {
-    const data = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/pokemonCart/");
-        const res = response.data;
-        //   Filter the array of pokemons from the active user:
-        let userPokemons = res.filter(
-          (item) => item.user === activeUser.username
-        );
-        //   Extract array of indexes
-        setPlayerPokemonsId(userPokemons.map((a) => a.pok_id));
-        //   Extract index of each Pokemon
-        setPlayerPokemon1(userPokemons[0].pok_id);
-        setPlayerPokemon2(userPokemons[1].pok_id);
-        setPlayerPokemon3(userPokemons[2].pok_id);
-        setPlayerPokemon4(userPokemons[3].pok_id);
-        setPlayerPokemon5(userPokemons[4].pok_id);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    data();
-  }, [activeUser.username]);
-
-  //   Get 5 random pokemons for PC:
+  const [imagePCPokemon1, setImagePCPokemon1] = useState("");
+  const [imagePCPokemon2, setImagePCPokemon2] = useState("");
+  const [imagePCPokemon3, setImagePCPokemon3] = useState("");
+  const [imagePCPokemon4, setImagePCPokemon4] = useState("");
+  const [imagePCPokemon5, setImagePCPokemon5] = useState("");
 
   useEffect(() => {
     const pcPokemonId = [];
     while (pcPokemonId.length < 5) {
-      let r = Math.floor(Math.random() * 811) + 1;
+      let r = Math.floor(Math.random() * 100) + 1;
       if (pcPokemonId.indexOf(r) === -1) pcPokemonId.push(r);
     }
     setPcPokemonId(pcPokemonId);
@@ -55,6 +41,110 @@ export default function Fight({ activeUser }) {
   const pcPokemon3 = pcPokemonId[2];
   const pcPokemon4 = pcPokemonId[3];
   const pcPokemon5 = pcPokemonId[4];
+
+  // const pcPokemonImageurl1 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[0]]?.name.english.toLowerCase()}`;
+  // const pcPokemonImageurl2 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[1]]?.name.english.toLowerCase()}`;
+  // const pcPokemonImageurl3 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[2]]?.name.english.toLowerCase()}`;
+  // const pcPokemonImageurl4 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[3]]?.name.english.toLowerCase()}`;
+  // const pcPokemonImageurl5 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[4]]?.name.english.toLowerCase()}`;
+  // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png
+
+  const pcPokemonImageurl1 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[0]}.png`
+  const pcPokemonImageurl2 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[1]}.png`
+  const pcPokemonImageurl3 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[2]}.png`
+  const pcPokemonImageurl4 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`
+  const pcPokemonImageurl5 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`
+
+  console.log(pcPokemonImageurl1
+    ,pcPokemonImageurl2
+    ,pcPokemonImageurl3
+    ,pcPokemonImageurl4
+    ,pcPokemonImageurl5)
+
+  //   Get Request to the pokemon cart:
+
+  useEffect(() => {
+    const data = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/pokemonCart/");
+        const res = response.data;
+       
+        //   Filter the array of pokemons from the active user:
+        let userPokemons = res.filter(
+          (item) => item.user === activeUser.username
+        );
+        //   Extract array of indexes
+        setPlayerPokemonsId(userPokemons.map((a) => a.pok_id));
+        console.log(userPokemons)
+        //   Extract index of each Pokemon
+        setPlayerPokemon1(userPokemons[0].pok_id);
+        setPlayerPokemon2(userPokemons[1].pok_id);
+        setPlayerPokemon3(userPokemons[2].pok_id);
+        setPlayerPokemon4(userPokemons[3].pok_id);
+        setPlayerPokemon5(userPokemons[4].pok_id);
+
+        setImagePokemon1(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[0].pok_id}.png`);
+        setImagePokemon2(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[1].pok_id}.png`);
+        setImagePokemon3(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[2].pok_id}.png`);
+        setImagePokemon4(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[3].pok_id}.png`);
+        setImagePokemon5(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[4].pok_id}.png`);
+
+      //   axios
+      //   .get(
+      //     pcPokemonImageurl1
+      //   )
+      //   .then((data1) => {
+      //     setImagePCPokemon1(data1.data.sprites.back_default);
+      //   })
+
+      //   .get(
+      //     pcPokemonImageurl2
+      //   )
+      //   .then((data2) => {
+      //     setImagePCPokemon2(data2.data.sprites.back_default);
+      //   })
+
+      //   .get(
+      //     pcPokemonImageurl3
+      //   )
+      //   .then((data3) => {
+      //     setImagePCPokemon3(data3.data.sprites.back_default);
+      //   })
+
+      //  .get(
+      //     pcPokemonImageurl4
+      //   )
+      //   .then((data4) => {
+      //     setImagePCPokemon4(data4.data.sprites.back_default);
+      //   })
+
+      //   .get(
+      //     pcPokemonImageurl5
+      //   )
+      //   .then((data5) => {
+      //     setImagePCPokemon5(data5.data.sprites.back_default);
+      //   })
+
+      } 
+      
+      
+      catch (err) {
+        console.log(err);
+      }
+    };
+    data();
+  }, [activeUser.username]);
+
+  //   Get 5 random pokemons for PC:
+
+
+    
+
+  console.log(imagePCPokemon1
+    ,imagePCPokemon2
+    ,imagePCPokemon3
+    ,imagePCPokemon4
+    ,imagePCPokemon5)
 
   let pcPokemons = pcPokemonId;
 
@@ -217,7 +307,6 @@ export default function Fight({ activeUser }) {
     setPlayerActivePokemon(playerPokemon5);
     setPlayerHP(playerHP5);
   };
-
   const ChangePokemon = () => {
     if (playerActivePokemon === playerPokemon1) {
       setPlayerHP1(playerHP);
@@ -326,7 +415,7 @@ export default function Fight({ activeUser }) {
   //   End of Logic
 
   return (
-    <div>
+    <div className="Fightarena">
       <h1>
         PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
       </h1>
@@ -361,7 +450,15 @@ export default function Fight({ activeUser }) {
         Pokemon 5 {playerHP5}
       </button>
       <button onClick={ChangePokemon}>Change Pokemon </button>
-
+      <div className="bounce-2 ">
+      {playerActivePokemon === playerPokemon1 ? (<img  className="singlePokemonBack bounce-2 " src = {imagePokemon1} />) : 
+        playerActivePokemon === playerPokemon2 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon2}/>) :
+        playerActivePokemon === playerPokemon3 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon3}/>) :
+        playerActivePokemon === playerPokemon4 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon4}/>) :
+        playerActivePokemon === playerPokemon5 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon5}/>): (
+          <img  className="singlePokemonBack bounce-2 " src = {imagePokemon1} />
+        ) }
+        </div>
       <p>Attack: {`${pokedex[playerActivePokemon].base.Attack}`} </p>
       <p>Defense: {`${pokedex[playerActivePokemon].base.Defense}`} </p>
       <p>
@@ -379,6 +476,16 @@ export default function Fight({ activeUser }) {
         <h1>
           PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
         </h1>
+
+        <div className="bounce-2 " >
+      { pcActivePokemon === pcPokemon1 ? (<img  src ={pcPokemonImageurl1} className="randomPokemon" />) : 
+        pcActivePokemon === pcPokemon2 ? (<img src = {pcPokemonImageurl2} className="randomPokemon"/>) :
+        pcActivePokemon === pcPokemon3 ? (<img src = {pcPokemonImageurl3} className="randomPokemon"/>) :
+        pcActivePokemon === pcPokemon4 ? (<img src = {pcPokemonImageurl4} className="randomPokemon"/>) :
+        pcActivePokemon === pcPokemon5 ? (<img src = {pcPokemonImageurl5} className="randomPokemon"/>): (
+          <img className="randomPokemon" src = {pcPokemonImageurl1}/>
+        ) }
+        </div>
         <p>PcActivePoki: {pcActivePokemon} </p>
         <p>Attack: {`${pokedex[pcActivePokemon].base.Defense}`} </p>
         <p>Defense: {`${pokedex[pcActivePokemon].base.Defense}`} </p>

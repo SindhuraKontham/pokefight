@@ -2,8 +2,11 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import './pokemoninfo.css';
 import cross from "./icons/cross.png";
+import { NavLink } from "react-router-dom";
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 
-export default function PokeCart({ cart, setCart }) {
+export default function PokeCart({ cart, setCart,activeUser,setActiveUser,cartQuantity }) {
 
 console.log(cart)
 
@@ -15,6 +18,14 @@ console.log(cart)
   }
 
   return (
+    <div>
+    <Header
+     activeUser={activeUser}
+     setActiveUser={setActiveUser}
+   />
+     <Navbar
+        cartQuantity={cartQuantity}
+      />
     <div className="cardmain">
        {cart.map((pokemon,index) => {
          return (
@@ -30,6 +41,12 @@ console.log(cart)
               </Card.Body>
             </Card>
          )})}
+        <NavLink to="/fightarena">
+        <button className="playbtn" id="wins" >
+              Go to Arena ??
+        </button>
+        </NavLink>
+    </div>
     </div>
   );
 }
