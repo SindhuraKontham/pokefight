@@ -67,6 +67,7 @@
 .button {
   border-radius: 1rem;
   background-color: #deb66c;
+  padding: 5px;
   /* mix-blend-mode: multiply; */
   /* cursor: pointer; */
 }
@@ -92,4 +93,25 @@
 .poke0,
 .poke1 {
   padding: 0.5rem 0.5rem;
+}
+
+.more {
+  font-family: "Aboreto", cursive;
+  font-size: large;
+  font-weight: bold;
+  background-color: rgba(49, 175, 133, 0.766);
+}
+
+.remove {
+  font-family: "Aboreto", cursive;
+  font-size: large;
+  font-weight: bold;
+  background-color: rgb(249, 77, 77);
+}
+
+.full {
+  font-family: "Aboreto", cursive;
+  font-size: large;
+  font-weight: bold;
+  background-color: rgb(161, 159, 159);
 }
