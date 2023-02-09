@@ -10,13 +10,11 @@ const userSchema = new Schema({
 
  userSchema.pre('save', function(next) {
 
-  
     this.constructor.update({},{$set: {active: false}})
     .then(() => {
       
       next();
     });
- 
  
  });
 
