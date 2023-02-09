@@ -4,8 +4,40 @@ import { Col, Row, Card } from "react-bootstrap";
 import NewComponent from "./NewComponent";
 import pokedex from "./pokedex.json";
 
+
 function PokemonList({ pokemonsInfo, cart, setCart, query, user }) {
-  console.log(pokemonsInfo);
+  const [pokemon, setPokemon] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=150`)
+      .then((response) => {
+        let pokemonWithStats = [];
+        response.data.results.forEach((pokemon) => {
+          axios
+            .get(pokemon.url)
+            .then((res) => {
+              pokemonWithStats.push({
+                name: pokemon.name,
+                stats: res.data.stats,
+              });
+              if (pokemonWithStats.length === response.data.results.length) {
+                setPokemon(pokemonWithStats);
+                setLoading(false);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              setLoading(false);
+            });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, []);
 
   const [active, setActive] = useState(null);
 
