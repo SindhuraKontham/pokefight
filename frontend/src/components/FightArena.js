@@ -1,50 +1,46 @@
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
+import axios from "axios"
 import { useNavigate } from "react-router-dom";
-import DisplayPokemon from "../components/DisplayPokemon";
+import DisplayPokemonFront from "./DisplayPokemonFront";
+import DisplayPokemonBack from "./DisplayPokemonBack";
+import "./fightarena.css";
 
-function FightArena({
-  pokemons,
-  selectedPokemon,
-  randomPokemon,
-  setRandomPokemon,
-}) {
+function FightArena({pokemons,user}) {
+  const [selectedPokemon, setSelectedPokemon] = useState([]);
+  console.log(user)
 
-    console.log(pokemons)
   const navigate = useNavigate();
-  const randomPokemonID = Math.floor(Math.random() * pokemons.length);
-
-  const pokemonToDisplay = {
-    name: pokemons[randomPokemonID].name.english,
-    info: pokemons[randomPokemonID],
-  };
+  const randomPokemonInfo = pokemons[Math.floor(Math.random() * 15)];
 
   useEffect(() => {
-    setRandomPokemon(pokemonToDisplay);
-  }, []);
+  axios
+  .get(`http://localhost:3001/pokemonCart/${user.username}`)
+  .then((response) => {
+    setSelectedPokemon(response.data[0].pokeName);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}, [user]);
 
-  const checkfight = () => {
-    navigate("/results");
-  };
+console.log(selectedPokemon)
 
   return (
-    <div className="Fightarena-container">
-      <h3>Let the fight begin</h3>
+    < div className="Fightarena">      
       <div className="pokemonsToFight">
         <div className="selectedPokemon">
-          <DisplayPokemon pokemonToDisplay={selectedPokemon.name} />
-        </div>
-        <div className="vs">
-          <h2>VS</h2>
+          <DisplayPokemonBack pokemonToDisplay={selectedPokemon} />
         </div>
         <div className="randomPokemon">
-          <DisplayPokemon pokemonToDisplay={randomPokemon} />
+          <DisplayPokemonFront pokemonToDisplay={randomPokemonInfo} />
         </div>
-        <button className="playbtn" id="wins" onClick={checkfight}>
-          Who wins?
+        <button className="playbtn" id="wins" >
+          Who won??
         </button>
       </div>
-    </div>
-  );
+      </div>
+
+  )
 }
 
-export default FightArena;
+export default FightArena

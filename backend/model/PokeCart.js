@@ -24,6 +24,10 @@ const pokeCartSchema = new Schema({
     type: String,
   },
   active: { type: Boolean, default: false},
+  
+  pok_id: {
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model("PokeCart", pokeCartSchema);

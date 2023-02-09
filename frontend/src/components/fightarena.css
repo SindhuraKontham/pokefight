@@ -1,0 +1,95 @@
+.Fightarena {
+  background-image: url(./icons/fightarea.png);
+  background-size: cover;
+  width: 200;
+  height: 80vh;
+}
+
+.progress {
+  width: 20vh;
+  height: 0.9vh;
+}
+.playbtn {
+  margin: 0 auto;
+  max-width: 250px;
+  padding: 10px 10px;
+  border-radius: 10px;
+  background-color: rgb(22, 218, 103);
+  color: white;
+  font-size: 14;
+}
+
+.playbtn:hover {
+  background-color: red;
+  color: white;
+}
+
+.pokemonimg {
+  height: 350px;
+  width: 350px;
+}
+
+.animate__animated.animate__bounce {
+  /* --animate-duration: 1000s; */
+}
+
+/* .Fightarena{
+
+  background-image: url(./icons/fightarea.png);
+  width: 200;
+  height: 80vh;
+  background-size: cover;
+} */
+
+.singlePokemonBack {
+  margin-left: 25%;
+  position: absolute;
+  top: 63%;
+  right: 55%;
+}
+
+.randomPokemon {
+  position: absolute;
+  top: 43%;
+  margin-left: 15%;
+  right: 35%;
+}
+/* 
+
+
+.rotated {
+  transform: rotateY(20deg);
+}
+.rotatedback {
+  transform: rotateY(20deg);
+}
+
+.pokemonimg {
+  height: 600px;
+  width: 300px;
+  padding: 50px 50px;
+}
+
+
+
+.playbtn {
+  margin: 0 auto;
+  max-width: 250px;
+  padding: 10px 10px;
+  border-radius: 10px;
+  background-color: rgb(22, 218, 103);
+  color: white;
+  font-size: 14;
+}
+
+.playbtn:hover {
+  background-color: red;
+  color: white;
+}
+
+#wins {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */

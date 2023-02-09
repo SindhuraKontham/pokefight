@@ -13,7 +13,7 @@ const pokemonCartRouter = express.Router();
 
 
 pokemonCartRouter.post("/", createPokemon);
-pokemonCartRouter.get("/", getPokemon);
+pokemonCartRouter.get("/:user", getPokemon);
 pokemonCartRouter.get("/active", getActivePokemon);
 pokemonCartRouter.put("/:name", deletePokemon);
 

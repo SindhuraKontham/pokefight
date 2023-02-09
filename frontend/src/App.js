@@ -11,6 +11,7 @@ import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
 import PokemonInfo from "./components/PokemonInfo";
 import Navbar from "./components/Navbar";
+import Fight from "./components/Fight";
 
 function App() {
   const [pokemons, setPokemons] = useState([]); // eslint-disable-next-line
@@ -19,19 +20,22 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeUser, setActiveUser] = useState([]);
   const [pokemonsInfo, setPokemonsInfo] = useState([]);
-  const [randomPokemon, setRandomPokemon] = useState([]);
-  // const [pokemonsInfo, setPokemonsInfo] = useState([]);
-
-  console.log(pokemonsInfo)
 
   useEffect(() => {
     const data = async () => {
       try {
         const response = await axios.get("http://localhost:3001/users/active");
+        const pokemon = await axios.get("http://localhost:3001/pokemon");
         const res = response.data;
+        const respoke = pokemon.data;
         setActiveUser(res);
+        setPokemons(respoke);
+        // console.log(res);
+        // console.log(respoke);
+        return res, respoke;
         setPokemons(res);
-        console.log(res);
+        // console.log(res);
+        // console.log(activeUser);
         return res;
       } catch (err) {
         console.log(err);
@@ -39,23 +43,7 @@ function App() {
     };
     data();
   }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3001/pokemon")
-  //     .then((res) => {
-  //       const response = res.data;
-  //       setPokemons(response);
-  //       console.log(response);
-  //       return response;
-  //     })
-  //     .then((response) => {
-  //       setSearchResults(response);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  console.log(cart);
 
   const cartQuantity = cart.reduce(
     (quantity, item) => item.quantity + quantity,
@@ -87,6 +75,8 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<User setActiveUser={setActiveUser} />} />
+
+          <Route path="/Fight" element={<Fight activeUser={activeUser} />} />
           <Route
             path="/CreateUser"
             element={<CreateNewUser setActiveUser={setActiveUser} />}
@@ -97,7 +87,7 @@ function App() {
               <PokemonInfo
                 cart={cart}
                 setCart={setCart}
-                pokemons={pokemons}
+                // pokemons={pokemons}
                 setSearchResults={setSearchResults}
                 pokemonsInfo={pokemonsInfo}
                 setPokemonsInfo={setPokemonsInfo}
@@ -122,18 +112,28 @@ function App() {
               />
             }
           />
-
           <Route
             path="/fightarena"
             element={
               <FightArena
                 pokemons={pokemons}
+                user={activeUser}
+                // setRandomPokemon={setRandomPokemon}
+              />
+            }
+          />
+
+          {/* <Route
+            path="/fightarena"
+            element={
+              <FightArena
+                pokemons= {pokemons}
                 selectedPokemon={cart}
                 randomPokemon={randomPokemon}
                 setRandomPokemon={setRandomPokemon}
               />
             }
-          />
+          /> */}
         </Routes>
       </Container>
     </>
