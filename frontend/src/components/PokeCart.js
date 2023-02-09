@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import './pokemoninfo.css';
 import cross from "./icons/cross.png";
 import { NavLink } from "react-router-dom";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 export default function PokeCart({ cart, setCart,activeUser,setActiveUser,cartQuantity }) {
 
@@ -41,7 +42,7 @@ console.log(cart)
               </Card.Body>
             </Card>
          )})}
-        <NavLink to="/fightarena">
+        <NavLink to="/fight">
         <button className="playbtn" id="wins" >
               Go to Arena ??
         </button>
