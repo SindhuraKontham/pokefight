@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import pokedex from "./pokedex.json";
 import "./fightarena.css";
+import { Navigate } from "react-router-dom";
+import Score from "./Score";
 
 export default function Fight({ activeUser }) {
-  console.log(activeUser)
+  console.log(activeUser);
   const [playerPokemonsId, setPlayerPokemonsId] = useState([]);
   const [playerPokemon1, setPlayerPokemon1] = useState(0);
   const [playerPokemon2, setPlayerPokemon2] = useState(1);
@@ -25,6 +27,7 @@ export default function Fight({ activeUser }) {
   const [imagePCPokemon3, setImagePCPokemon3] = useState("");
   const [imagePCPokemon4, setImagePCPokemon4] = useState("");
   const [imagePCPokemon5, setImagePCPokemon5] = useState("");
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     const pcPokemonId = [];
@@ -50,12 +53,11 @@ export default function Fight({ activeUser }) {
   // const pcPokemonImageurl5 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[4]]?.name.english.toLowerCase()}`;
   // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png
 
-  const pcPokemonImageurl1 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[0]}.png`
-  const pcPokemonImageurl2 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[1]}.png`
-  const pcPokemonImageurl3 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[2]}.png`
-  const pcPokemonImageurl4 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`
-  const pcPokemonImageurl5 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`
-
+  const pcPokemonImageurl1 = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[0]}.png`;
+  const pcPokemonImageurl2 = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[1]}.png`;
+  const pcPokemonImageurl3 = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[2]}.png`;
+  const pcPokemonImageurl4 = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`;
+  const pcPokemonImageurl5 = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`;
 
   //   Get Request to the pokemon cart:
 
@@ -64,14 +66,14 @@ export default function Fight({ activeUser }) {
       try {
         const response = await axios.get("http://localhost:3001/pokemonCart/");
         const res = response.data;
-       
+
         //   Filter the array of pokemons from the active user:
         let userPokemons = res.filter(
           (item) => item.user === activeUser.username
         );
         //   Extract array of indexes
         setPlayerPokemonsId(userPokemons.map((a) => a.pok_id));
-       
+
         //   Extract index of each Pokemon
         setPlayerPokemon1(userPokemons[0].pok_id);
         setPlayerPokemon2(userPokemons[1].pok_id);
@@ -79,55 +81,59 @@ export default function Fight({ activeUser }) {
         setPlayerPokemon4(userPokemons[3].pok_id);
         setPlayerPokemon5(userPokemons[4].pok_id);
 
+        setImagePokemon1(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[0].pok_id}.png`
+        );
+        setImagePokemon2(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[1].pok_id}.png`
+        );
+        setImagePokemon3(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[2].pok_id}.png`
+        );
+        setImagePokemon4(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[3].pok_id}.png`
+        );
+        setImagePokemon5(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[4].pok_id}.png`
+        );
 
-
-        setImagePokemon1(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[0].pok_id}.png`);
-        setImagePokemon2(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[1].pok_id}.png`);
-        setImagePokemon3(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[2].pok_id}.png`);
-        setImagePokemon4(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[3].pok_id}.png`);
-        setImagePokemon5(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[4].pok_id}.png`);
-        
         // console.log(imagePokemon1,imagePokemon2,imagePokemon3,imagePokemon4,imagePokemon5)
-      //   axios
-      //   .get(
-      //     pcPokemonImageurl1
-      //   )
-      //   .then((data1) => {
-      //     setImagePCPokemon1(data1.data.sprites.back_default);
-      //   })
+        //   axios
+        //   .get(
+        //     pcPokemonImageurl1
+        //   )
+        //   .then((data1) => {
+        //     setImagePCPokemon1(data1.data.sprites.back_default);
+        //   })
 
-      //   .get(
-      //     pcPokemonImageurl2
-      //   )
-      //   .then((data2) => {
-      //     setImagePCPokemon2(data2.data.sprites.back_default);
-      //   })
+        //   .get(
+        //     pcPokemonImageurl2
+        //   )
+        //   .then((data2) => {
+        //     setImagePCPokemon2(data2.data.sprites.back_default);
+        //   })
 
-      //   .get(
-      //     pcPokemonImageurl3
-      //   )
-      //   .then((data3) => {
-      //     setImagePCPokemon3(data3.data.sprites.back_default);
-      //   })
+        //   .get(
+        //     pcPokemonImageurl3
+        //   )
+        //   .then((data3) => {
+        //     setImagePCPokemon3(data3.data.sprites.back_default);
+        //   })
 
-      //  .get(
-      //     pcPokemonImageurl4
-      //   )
-      //   .then((data4) => {
-      //     setImagePCPokemon4(data4.data.sprites.back_default);
-      //   })
+        //  .get(
+        //     pcPokemonImageurl4
+        //   )
+        //   .then((data4) => {
+        //     setImagePCPokemon4(data4.data.sprites.back_default);
+        //   })
 
-      //   .get(
-      //     pcPokemonImageurl5
-      //   )
-      //   .then((data5) => {
-      //     setImagePCPokemon5(data5.data.sprites.back_default);
-      //   })
-
-      } 
-      
-      
-      catch (err) {
+        //   .get(
+        //     pcPokemonImageurl5
+        //   )
+        //   .then((data5) => {
+        //     setImagePCPokemon5(data5.data.sprites.back_default);
+        //   })
+      } catch (err) {
         console.log(err);
       }
     };
@@ -135,15 +141,6 @@ export default function Fight({ activeUser }) {
   }, [activeUser.username]);
 
   //   Get 5 random pokemons for PC:
-
-
-    
-
-  console.log(imagePCPokemon1
-    ,imagePCPokemon2
-    ,imagePCPokemon3
-    ,imagePCPokemon4
-    ,imagePCPokemon5)
 
   let pcPokemons = pcPokemonId;
 
@@ -323,6 +320,14 @@ export default function Fight({ activeUser }) {
   //   Attack function
 
   const PlayerAttack = () => {
+    // console.log(
+    //   pcHP,
+    //   pcHPTaken,
+    //   playerHP,
+    //   playerTaken,
+    //   pcActivePokemon,
+    //   playerActivePokemon
+    // );
     const pcHPTaken =
       (pokedex[pcActivePokemon].base.Defense *
         pokedex[playerActivePokemon].base.Attack) /
@@ -339,17 +344,48 @@ export default function Fight({ activeUser }) {
       pokedex[playerActivePokemon].base.Speed >
       pokedex[pcActivePokemon].base.Speed
     ) {
+      console.log(
+        pcHP,
+        pcHPTaken,
+        playerHP,
+        playerTaken,
+        pcActivePokemon,
+        playerActivePokemon
+      );
       RefreshPcHP();
-
+      console.log(
+        pcHP,
+        pcHPTaken,
+        playerHP,
+        playerTaken,
+        pcActivePokemon,
+        playerActivePokemon
+      );
       pcHP - pcHPTaken > 0 ? setPcHP(pcHP - pcHPTaken) : setPcHP(0);
 
       setTimeout(() => {
+        console.log(
+          pcHP,
+          pcHPTaken,
+          playerHP,
+          playerTaken,
+          pcActivePokemon,
+          playerActivePokemon
+        );
         playerHP - playerTaken > 0
           ? setPlayerHP(playerHP - playerTaken)
           : setPlayerHP(0);
         setPcSpAttack(Math.random() > difficulty ? false : true);
         setPlayerSpAttack(Math.random() > difficulty ? true : false);
         SavePcHPandChange();
+        console.log(
+          pcHP,
+          pcHPTaken,
+          playerHP,
+          playerTaken,
+          pcActivePokemon,
+          playerActivePokemon
+        );
       }, delay);
     } else {
       RefreshPcHP();
@@ -357,12 +393,35 @@ export default function Fight({ activeUser }) {
       playerHP - playerTaken > 0
         ? setPlayerHP(playerHP - playerTaken)
         : setPlayerHP(0);
-
+      console.log(
+        pcHP,
+        pcHPTaken,
+        playerHP,
+        playerTaken,
+        pcActivePokemon,
+        playerActivePokemon
+      );
       setTimeout(() => {
+        console.log(
+          pcHP,
+          pcHPTaken,
+          playerHP,
+          playerTaken,
+          pcActivePokemon,
+          playerActivePokemon
+        );
         pcHP - pcHPTaken > 0 ? setPcHP(pcHP - pcHPTaken) : setPcHP(0);
         setPcSpAttack(Math.random() > difficulty ? false : true);
         setPlayerSpAttack(Math.random() > difficulty ? true : false);
         SavePcHPandChange();
+        console.log(
+          pcHP,
+          pcHPTaken,
+          playerHP,
+          playerTaken,
+          pcActivePokemon,
+          playerActivePokemon
+        );
       }, delay);
     }
   };
@@ -413,6 +472,76 @@ export default function Fight({ activeUser }) {
 
   //   End of Logic
 
+  //   Post of the score in fight db
+  const resultWinner =
+    playerHP1 === 0 &&
+    playerHP2 === 0 &&
+    playerHP3 === 0 &&
+    playerHP4 === 0 &&
+    playerHP5 === 0
+      ? false
+      : true;
+
+  const resultScore =
+    pokedex[pcPokemonId[0]].base.HP +
+    pokedex[pcPokemonId[1]].base.HP +
+    pokedex[pcPokemonId[2]].base.HP +
+    pokedex[pcPokemonId[3]].base.HP +
+    pokedex[pcPokemonId[4]].base.HP +
+    pcHP1 -
+    pcHP2 -
+    pcHP3 -
+    pcHP4 -
+    pcHP5;
+
+  const postData = {
+    user: activeUser.username,
+    img: activeUser.img,
+    winner: resultWinner,
+    score: resultScore,
+  };
+
+  function postResult() {
+    axios.post("http://localhost:3001/fight", postData).then((res) => {
+      setGameOver(() => {
+        return [res.data];
+      });
+    });
+  }
+  useEffect(() => {
+    if (
+      playerHP1 === 0 &&
+      playerHP2 === 0 &&
+      playerHP3 === 0 &&
+      playerHP4 === 0 &&
+      playerHP5 === 0
+    ) {
+      setGameOver(true);
+      postResult();
+    } else if (
+      pcHP1 === 0 &&
+      pcHP2 === 0 &&
+      pcHP3 === 0 &&
+      pcHP4 === 0 &&
+      pcHP5 === 0
+    ) {
+      setGameOver(true);
+      postResult();
+    }
+  }, [
+    playerHP1,
+    playerHP2,
+    playerHP3,
+    playerHP4,
+    playerHP5,
+    pcHP1,
+    pcHP2,
+    pcHP3,
+    pcHP4,
+    pcHP5,
+  ]);
+
+  console.log(gameOver);
   return (
     <div className="Fightarena">
       <h1>
@@ -450,14 +579,20 @@ export default function Fight({ activeUser }) {
       </button>
       <button onClick={ChangePokemon}>Change Pokemon </button>
       <div className="bounce-2 ">
-      {playerActivePokemon === playerPokemon1 ? (<img  className="singlePokemonBack bounce-2 " src = {imagePokemon1} />) : 
-        playerActivePokemon === playerPokemon2 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon2}/>) :
-        playerActivePokemon === playerPokemon3 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon3}/>) :
-        playerActivePokemon === playerPokemon4 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon4}/>) :
-        playerActivePokemon === playerPokemon5 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon5}/>): (
-          <img  className="singlePokemonBack bounce-2 " src = {imagePokemon1} />
-        ) }
-        </div>
+        {playerActivePokemon === playerPokemon1 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon1} />
+        ) : playerActivePokemon === playerPokemon2 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon2} />
+        ) : playerActivePokemon === playerPokemon3 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon3} />
+        ) : playerActivePokemon === playerPokemon4 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon4} />
+        ) : playerActivePokemon === playerPokemon5 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon5} />
+        ) : (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon1} />
+        )}
+      </div>
       <p>Attack: {`${pokedex[playerActivePokemon].base.Attack}`} </p>
       <p>Defense: {`${pokedex[playerActivePokemon].base.Defense}`} </p>
       <p>
@@ -476,14 +611,20 @@ export default function Fight({ activeUser }) {
           PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
         </h1>
 
-        <div className="bounce-2 " >
-      { pcActivePokemon === pcPokemon1 ? (<img  src ={pcPokemonImageurl1} className="randomPokemon" />) : 
-        pcActivePokemon === pcPokemon2 ? (<img src = {pcPokemonImageurl2} className="randomPokemon"/>) :
-        pcActivePokemon === pcPokemon3 ? (<img src = {pcPokemonImageurl3} className="randomPokemon"/>) :
-        pcActivePokemon === pcPokemon4 ? (<img src = {pcPokemonImageurl4} className="randomPokemon"/>) :
-        pcActivePokemon === pcPokemon5 ? (<img src = {pcPokemonImageurl5} className="randomPokemon"/>): (
-          <img className="randomPokemon" src = {pcPokemonImageurl1}/>
-        ) }
+        <div className="bounce-2 ">
+          {pcActivePokemon === pcPokemon1 ? (
+            <img src={pcPokemonImageurl1} className="randomPokemon" />
+          ) : pcActivePokemon === pcPokemon2 ? (
+            <img src={pcPokemonImageurl2} className="randomPokemon" />
+          ) : pcActivePokemon === pcPokemon3 ? (
+            <img src={pcPokemonImageurl3} className="randomPokemon" />
+          ) : pcActivePokemon === pcPokemon4 ? (
+            <img src={pcPokemonImageurl4} className="randomPokemon" />
+          ) : pcActivePokemon === pcPokemon5 ? (
+            <img src={pcPokemonImageurl5} className="randomPokemon" />
+          ) : (
+            <img className="randomPokemon" src={pcPokemonImageurl1} />
+          )}
         </div>
         <p>PcActivePoki: {pcActivePokemon} </p>
         <p>Attack: {`${pokedex[pcActivePokemon].base.Defense}`} </p>
@@ -514,6 +655,7 @@ export default function Fight({ activeUser }) {
           poki5 {pcPokemon5}: {pcHP5}
         </p>
       </div>
+      {gameOver && <Navigate to="/Score" />}
     </div>
   );
 }
