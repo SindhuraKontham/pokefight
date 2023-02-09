@@ -11,8 +11,7 @@
 
 .LogoDiv {
   background-color: rgb(26, 42, 87);
-  padding: 2rem 3rem 2rem 3rem;
-
+  padding: 2rem 3rem 1rem 3rem;
 }
 
 .LogoDiv img {
@@ -57,11 +56,33 @@
   position: absolute;
   display: flex;
   align-items: center;
-  top: 7rem;
-  right: 3rem;
+  top: 6.2rem;
+  right: 14rem;
   max-width: 20%;
   border-radius: 25px;
   padding-right: 1rem;
+  background-color: rgb(253, 219, 68);
+}
+
+.ChangeUserButton p,
+.CreateUserButton p {
+  margin: 0;
+}
+.ChangeUserButton {
+  position: absolute;
+  top: 4rem;
+  right: 15rem;
+  border-radius: 25px;
+  padding: 0 0.5rem;
+  background-color: rgb(253, 219, 68);
+}
+
+.CreateUserButton {
+  position: absolute;
+  top: 1.8rem;
+  right: 14rem;
+  border-radius: 25px;
+  padding: 0 0.5rem;
   background-color: rgb(253, 219, 68);
 }
 

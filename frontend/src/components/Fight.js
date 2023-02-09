@@ -5,6 +5,7 @@ import pokedex from "./pokedex.json";
 import "./fightarena.css";
 
 export default function Fight({ activeUser }) {
+  console.log(activeUser)
   const [playerPokemonsId, setPlayerPokemonsId] = useState([]);
   const [playerPokemon1, setPlayerPokemon1] = useState(0);
   const [playerPokemon2, setPlayerPokemon2] = useState(1);
@@ -55,11 +56,6 @@ export default function Fight({ activeUser }) {
   const pcPokemonImageurl4 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`
   const pcPokemonImageurl5 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`
 
-  console.log(pcPokemonImageurl1
-    ,pcPokemonImageurl2
-    ,pcPokemonImageurl3
-    ,pcPokemonImageurl4
-    ,pcPokemonImageurl5)
 
   //   Get Request to the pokemon cart:
 
@@ -75,7 +71,7 @@ export default function Fight({ activeUser }) {
         );
         //   Extract array of indexes
         setPlayerPokemonsId(userPokemons.map((a) => a.pok_id));
-        console.log(userPokemons)
+       
         //   Extract index of each Pokemon
         setPlayerPokemon1(userPokemons[0].pok_id);
         setPlayerPokemon2(userPokemons[1].pok_id);
@@ -83,12 +79,15 @@ export default function Fight({ activeUser }) {
         setPlayerPokemon4(userPokemons[3].pok_id);
         setPlayerPokemon5(userPokemons[4].pok_id);
 
+
+
         setImagePokemon1(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[0].pok_id}.png`);
         setImagePokemon2(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[1].pok_id}.png`);
         setImagePokemon3(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[2].pok_id}.png`);
         setImagePokemon4(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[3].pok_id}.png`);
         setImagePokemon5(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[4].pok_id}.png`);
-
+        
+        // console.log(imagePokemon1,imagePokemon2,imagePokemon3,imagePokemon4,imagePokemon5)
       //   axios
       //   .get(
       //     pcPokemonImageurl1
