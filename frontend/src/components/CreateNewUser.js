@@ -12,8 +12,9 @@ import ProfilePic1 from "../Images/1.png";
 import ProfilePic2 from "../Images/2.png";
 import ProfilePic3 from "../Images/3.png";
 import ProfilePic4 from "../Images/4.png";
+import Header from "../components/Header";
 
-export default function CreateNewUser({ setActiveUser }) {
+export default function CreateNewUser({ activeUser, setActiveUser }) {
   const [picture, setPicture] = useState(0);
   const [username, setUsername] = useState("");
 
@@ -44,6 +45,11 @@ export default function CreateNewUser({ setActiveUser }) {
   }
 
   return (
+    <div>
+    <Header
+     activeUser={activeUser}
+     setActiveUser={setActiveUser}
+   />
     <div className="text-center mt-5  ">
       <h2 className="GameBoyFont">Got it, let's sign you up!</h2>
       <Card.Subtitle className="GameBoyFont">
@@ -91,6 +97,7 @@ export default function CreateNewUser({ setActiveUser }) {
           Sign up
         </Button>
       </NavLink>
+    </div>
     </div>
   );
 }

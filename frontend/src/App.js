@@ -5,7 +5,6 @@ import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import FightArena from "./components/FightArena";
-import Header from "./components/Header";
 import User from "./components/User";
 import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
@@ -59,27 +58,14 @@ function App() {
 
   return (
     <>
-      <Header
-        activeUser={activeUser}
-        setActiveUser={setActiveUser}
-        cartQuantity={cartQuantity}
-        openCart={openCart}
-        closeCart={closeCart}
-      />
-      <Navbar
-        cartQuantity={cartQuantity}
-        openCart={openCart}
-        closeCart={closeCart}
-        isOpen={isOpen}
-      />
-      <Container>
+      {/* <Container> */}
         <Routes>
-          <Route path="/" element={<User setActiveUser={setActiveUser} />} />
+          <Route path="/" element={<User setActiveUser={setActiveUser}  activeUser={activeUser}/> } />
 
           <Route path="/Fight" element={<Fight activeUser={activeUser} />} />
           <Route
             path="/CreateUser"
-            element={<CreateNewUser setActiveUser={setActiveUser} />}
+            element={<CreateNewUser  activeUser={activeUser} setActiveUser={setActiveUser} />}
           />
           <Route
             path="/pokemons"
@@ -87,18 +73,15 @@ function App() {
               <PokemonInfo
                 cart={cart}
                 setCart={setCart}
-                // pokemons={pokemons}
                 setSearchResults={setSearchResults}
                 pokemonsInfo={pokemonsInfo}
                 setPokemonsInfo={setPokemonsInfo}
                 user={activeUser}
+                setActiveUser={setActiveUser}
+                cartQuantity={cartQuantity}
               />
             }
           />
-          {/* <Route
-            path="/pokemons/pokemon"
-            element={<Pokemon pokemonId={Math.floor(Math.random() * 1000)} />}
-          /> */}
           <Route
             path="/cart"
             element={
@@ -109,33 +92,13 @@ function App() {
                 openCart={openCart}
                 closeCart={closeCart}
                 isOpen={isOpen}
+                activeUser={activeUser}
+                setActiveUser={setActiveUser}
               />
             }
           />
-          <Route
-            path="/fightarena"
-            element={
-              <FightArena
-                pokemons={pokemons}
-                user={activeUser}
-                // setRandomPokemon={setRandomPokemon}
-              />
-            }
-          />
-
-          {/* <Route
-            path="/fightarena"
-            element={
-              <FightArena
-                pokemons= {pokemons}
-                selectedPokemon={cart}
-                randomPokemon={randomPokemon}
-                setRandomPokemon={setRandomPokemon}
-              />
-            }
-          /> */}
         </Routes>
-      </Container>
+      {/* </Container> */}
     </>
   );
 }

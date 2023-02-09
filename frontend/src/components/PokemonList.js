@@ -4,21 +4,22 @@ import PokemonType from "./PokemonType";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import pokedex from "./pokedex.json";
+import { useEffect, useState } from "react";
+import Pokemon from "./Pokemon";
 
 function PokemonList({ pokemonsInfo, cart, setCart, query, user }) {
-  console.log(pokemonsInfo);
-
   return (
     <div>
-      <Col sm={8} className="cardmain">
+      <Col sm={12} className="cardmain">
         {pokemonsInfo
           .filter((pokemon) => pokemon.name.toLowerCase().includes(query))
           .map((pokemon, index) => {
+            console.log(pokemon.url)
             return (
               <Card
                 className="cardpoke"
                 border="primary"
-                style={{ width: "13rem", height: "17rem" }}
+                style={{ width: "16rem", padding: ".5rem"}}
               >
                 <PokemonType id={index} name={pokemon.name} />
                 <Card.Img
@@ -31,6 +32,8 @@ function PokemonList({ pokemonsInfo, cart, setCart, query, user }) {
                     <br /> {pokemon.name}
                   </Card.Title>
 
+                  <Pokemon url = {pokemon.url} />
+
                   <button
                     onClick={() => {
                       const stateCopy = cart.slice();
@@ -39,13 +42,6 @@ function PokemonList({ pokemonsInfo, cart, setCart, query, user }) {
                         name: pokemon.name,
                       });
                       setCart(stateCopy);
-
-                      // const post = {
-                      //   img:  `https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`,
-                      //   name: pokemon.name,
-                      // }
-
-                      // console.log(post)
                       let pokiname =
                         pokemon.name.charAt(0).toUpperCase() +
                         pokemon.name.slice(1);

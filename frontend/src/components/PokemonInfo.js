@@ -9,10 +9,12 @@ import PokemonList from "./PokemonList";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Search from "../components/Search"
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 
-function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
+function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiveUser,cartQuantity }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(6);
+  const [recordsPerPage] = useState(8);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
   const pokRef = useRef();
@@ -21,7 +23,7 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=15&offset=0")
+      .get("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0")
       .then((response) => {
 
         setPokemonsInfo(response.data.results);
@@ -62,6 +64,14 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
   };
 
   return (
+    <div>
+    <Header
+     activeUser={user}
+     setActiveUser={setActiveUser}
+   />
+     <Navbar
+        cartQuantity={cartQuantity}
+      />
     <div className="body">
       <Container>
         <Search  data={search(pokemonsInfo)}
@@ -101,6 +111,7 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user }) {
         </Row>
       </Container>
 
+    </div>
     </div>
   );
 }
