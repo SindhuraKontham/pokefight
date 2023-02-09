@@ -60,7 +60,7 @@ export default function Header({
         </button>
       )}
 
-      <Link to="/cart">
+      {/* <Link to="/cart">
         <img
           className="pokeball"
           src={Ball}
@@ -68,7 +68,7 @@ export default function Header({
           width={70}
           height={70}
         ></img>
-      </Link>
+      </Link> */}
 
       
     </div>

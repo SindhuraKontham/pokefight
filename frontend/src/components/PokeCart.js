@@ -8,6 +8,8 @@ import Navbar from "../components/Navbar";
 
 export default function PokeCart({ cart, setCart,activeUser,setActiveUser,cartQuantity }) {
 
+console.log(cart)
+
   const handleOnClick = () => {
     const stateCopy = cart.slice();
     let index = stateCopy.findIndex((x) => x.cart === cart.cart);

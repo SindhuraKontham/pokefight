@@ -18,6 +18,7 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiv
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
   const pokRef = useRef();
+  const [getPokemonsInfo, setGetPokemonsInfo] = useState([]);
  
 
   useEffect(() => {
@@ -25,7 +26,6 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiv
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0")
       .then((response) => {
-
         setPokemonsInfo(response.data.results);
         // setQuery(response.data.results);
         setLoading(false);
@@ -34,6 +34,21 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiv
         console.log(error);
       });
   }, []);
+
+  const getPokemonInfo = async (response) => {
+    response.map(async (item) => {
+      const result = await axios.get(item.url);
+      // console.log(result.data);
+      setGetPokemonsInfo(result.data)
+
+      //   (state) => {
+      //   state = [...state, result.data];
+      //   // state.sort((a, b) => a.id > b.id ? 1: -1 )
+      //   console.log(state)
+      //   return state;
+      //  }
+    });
+  };
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -63,6 +78,11 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiv
     return data.filter((item) => item.name.toLowerCase().includes(query));
   };
 
+  const sort = (data) => {
+    console.log(data)
+    return data.sort()
+  }
+
   return (
     <div>
     <Header
@@ -74,11 +94,15 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiv
       />
     <div className="body">
       <Container>
+        <Row>
         <Search  data={search(pokemonsInfo)}
         handleSubmit={handleSubmit}
         query={query}
         setQuery={setQuery}
-        pokemonsInfo={pokemonsInfo}/>
+        pokemonsInfo={pokemonsInfo}
+        // setPokemonsInfo={setPokemonsInfo}
+        />
+        </Row>
         <Row>
         <Stack spacing={2}>
             <Pagination 
@@ -98,6 +122,7 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiv
           ) : (
             <PokemonList
               pokemonsInfo={currentRecords}
+
               cart={cart}
               setCart={setCart}
               user = {user}

@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import Pokeball from "./images/pokeball.png";
 import "./navbar.css";
 import { useState } from "react";
-import { Offcanvas } from "react-bootstrap";
-// import CartItem from "./CartItem"
+import { Link } from "react-router-dom";
+import Ball from "./icons/pokemonball.png";
 
 export default function Navbar({ cartQuantity}) {
   const [show, setShow] = useState(false);
@@ -29,13 +29,14 @@ export default function Navbar({ cartQuantity}) {
           </Nav.Link>
         </Nav>
 
+        <Link to="/cart">
         <Button
-          onClick={handleShow}
           style={{ position: "relative" }}
           variant=""
         >
           <img
-            src={Pokeball}
+          src={Ball}
+            // src={Pokeball}
             alt="Pokeball"
             style={{ width: "4rem", height: "4rem" }}
           />
@@ -45,20 +46,7 @@ export default function Navbar({ cartQuantity}) {
             </div>
           )}
         </Button>
-        <Offcanvas show={show} onHide={handleClose} placement="end">
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Pokemon Cart</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Stack gap={3}>
-              {/* {cartItems.map(item => (
-                <CartItem key={item.id} {...item} />
-              ))} */}
-
-            </Stack>
-            pokemons here
-          </Offcanvas.Body>
-        </Offcanvas>
+        </Link>
       </Container>
     </NavBs>
   );

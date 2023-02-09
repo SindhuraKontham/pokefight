@@ -5,7 +5,7 @@
   }
 
 .input_form {
-  width: 65%;
+  width: 100%;
   border: 2px solid #000;
   border-radius: 2em;
   overflow: hidden;
@@ -27,6 +27,8 @@
   padding: 0.5em;
   width: 85%;
   font-size: 1.5rem;
+  font-family: "Press Start 2P";
+  font-size: 20px;
 }
 
 .search_button {
@@ -36,4 +38,18 @@
   color: gray;
   display: grid;
   place-content: center;
+}
+
+.sort {
+    width: 50%;
+    border: 2px solid #000;
+    border-radius: 2em;
+    align-items: center;
+    margin: 1em;
+    font-family: "Press Start 2P";
+
+}
+.btn {
+  border-radius: 2em;
+  font-size: 10px;
 }
