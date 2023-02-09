@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import Card from "react-bootstrap/Card";
 import PokemonType from "./PokemonType";
 import axios from 'axios';
-import pokedex from "./pokedex.json";
+import Pokemon from "./Pokemon";
 
-export default function NewComponent({pokemon, index, cart, setCart, user, pokedex }) {
+export default function NewComponent({pokemon, index, cart, setCart, user, pokedex,setClick,click }) {
     const [btnState, setBtnState] =useState(false)
    
+    const handleOnclick =() => {
+      setClick(!click)
+    }
+  
     
     const setActive = () => {
         setBtnState(!btnState);
@@ -33,6 +37,7 @@ export default function NewComponent({pokemon, index, cart, setCart, user, poked
               <Card.Title className="title">
                 <br /> {pokemon.name}
               </Card.Title>
+              <Pokemon url = {pokemon.url} />
             {quantity < 5 ? (
             <>
             <button className="button remove"
@@ -59,7 +64,7 @@ export default function NewComponent({pokemon, index, cart, setCart, user, poked
         <Card
                 className="cardpoke"
                 border="primary"
-                style={{ width: "13rem", height: "17rem" }}
+                style={{ width: "16rem", padding:".5rem" }}
               >
                 <PokemonType id={index} name={pokemon.name} />
                 <Card.Img
@@ -71,6 +76,7 @@ export default function NewComponent({pokemon, index, cart, setCart, user, poked
                   <Card.Title className="title">
                     <br /> {pokemon.name}
                   </Card.Title>
+                  <Pokemon url = {pokemon.url} />
                 {quantity < 5 ? (
                 <>
                 <button
@@ -112,7 +118,7 @@ export default function NewComponent({pokemon, index, cart, setCart, user, poked
                     {" "}
                     Add
                   </button>
-                  <button className="button more">More</button>
+                  <button onClick = {handleOnclick} className="button more">More</button>
                 </>
 
                 ) : (
