@@ -5,6 +5,7 @@ import axios from "axios";
 import Pokemon from "./Pokemon";
 import "./pokemoninfo.css";
 // import Button from "./Button";
+import pokedex from "./pokedex.json";
 
 export default function NewComponent({
   pokemon,
@@ -12,7 +13,6 @@ export default function NewComponent({
   cart,
   setCart,
   user,
-  pokedex,
   setClick,
   click,
 }) {
