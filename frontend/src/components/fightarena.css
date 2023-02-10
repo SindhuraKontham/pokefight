@@ -7,8 +7,12 @@ body {
   background-image: url(./icons/fightarea.png);
   background-size: cover;
   width: 200;
-  height: 100vh;
+  height: 120vh;
   mix-blend-mode: multiply;
+}
+
+.imgopacity {
+  opacity: 0.5;
 }
 
 .progress {

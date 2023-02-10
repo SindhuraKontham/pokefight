@@ -139,7 +139,7 @@ export default function Fight({ activeUser }) {
   let pcPokemons = pcPokemonId;
 
   //   more difficulty (0-1) means more special attacks for the PC and less to Player:
-  let difficulty = 0.2;
+  let difficulty = 0.5;
 
   //   Delay for the pc attack in milliseconds:
   const delay = 2000;
@@ -299,41 +299,44 @@ export default function Fight({ activeUser }) {
   };
 
   const PlayerIsAttacked = () => {
-    const playerHPTaken = playerUsingSpA
-      ? ((pcSpAttack
-          ? pokedex[playerActivePokemon].base["Sp. Defense"]
-          : pokedex[playerActivePokemon].base.Defense) *
-          (pcSpAttack
-            ? pokedex[pcActivePokemon].base["Sp. Attack"]
-            : pokedex[pcActivePokemon].base.Attack)) /
-        230
-      : pcSpAttack
+    const playerHPTaken = pcSpAttack
       ? (pokedex[playerActivePokemon].base["Sp. Defense"] *
           pokedex[pcActivePokemon].base["Sp. Attack"]) /
         230
       : (pokedex[playerActivePokemon].base.Defense *
           pokedex[pcActivePokemon].base.Attack) /
         230;
+
     if (playerActivePokemon === playerPokemon1) {
-      playerHP1 - playerHPTaken > 0
-        ? setPlayerHP1(Math.round(playerHP1 - playerHPTaken))
-        : setPlayerHP1(0);
+      if (Math.round(playerHP1 - playerHPTaken) > 0) {
+        setPlayerHP1(Math.round(playerHP1 - playerHPTaken));
+      } else {
+        setPlayerHP1(0);
+      }
     } else if (playerActivePokemon === playerPokemon2) {
-      playerHP1 - playerHPTaken > 0
-        ? setPlayerHP2(Math.round(playerHP2 - playerHPTaken))
-        : setPlayerHP2(0);
+      if (Math.round(playerHP2 - playerHPTaken) > 0) {
+        setPlayerHP2(Math.round(playerHP2 - playerHPTaken));
+      } else {
+        setPlayerHP2(0);
+      }
     } else if (playerActivePokemon === playerPokemon3) {
-      playerHP1 - playerHPTaken > 0
-        ? setPlayerHP3(Math.round(playerHP3 - playerHPTaken))
-        : setPlayerHP3(0);
+      if (Math.round(playerHP3 - playerHPTaken) > 0) {
+        setPlayerHP3(Math.round(playerHP3 - playerHPTaken));
+      } else {
+        setPlayerHP3(0);
+      }
     } else if (playerActivePokemon === playerPokemon4) {
-      playerHP1 - playerHPTaken > 0
-        ? setPlayerHP4(Math.round(playerHP4 - playerHPTaken))
-        : setPlayerHP4(0);
+      if (Math.round(playerHP4 - playerHPTaken) > 0) {
+        setPlayerHP4(Math.round(playerHP4 - playerHPTaken));
+      } else {
+        setPlayerHP4(0);
+      }
     } else {
-      playerHP1 - playerHPTaken > 0
-        ? setPlayerHP5(Math.round(playerHP5 - playerHPTaken))
-        : setPlayerHP5(0);
+      if (Math.round(playerHP5 - playerHPTaken) > 0) {
+        setPlayerHP5(Math.round(playerHP5 - playerHPTaken));
+      } else {
+        setPlayerHP5(0);
+      }
     }
   };
 
@@ -503,7 +506,7 @@ export default function Fight({ activeUser }) {
           <div>
             <div>
               <img
-                className="display userPlayer"
+                className={`display userPlayer ${playerHP1 === 0? "imgopacity" : ""}`}
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                   playerPokemon1 + 1
                 }.png`}
@@ -582,7 +585,7 @@ export default function Fight({ activeUser }) {
             )}
           </div>
           <img
-            className="display userPlayer"
+            className={`display userPlayer ${pcHP1 === 0? "imgopacity" : ""}`}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
               pcPokemonId[0] + 1
             }.png`}
@@ -595,7 +598,7 @@ export default function Fight({ activeUser }) {
           <div>
             <div>
               <img
-                className="display userPlayer"
+                className={`display userPlayer ${playerHP2=== 0? "imgopacity" : ""}`}
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                   playerPokemon2 + 1
                 }.png`}
@@ -617,7 +620,7 @@ export default function Fight({ activeUser }) {
             </div>
           </div>
           <img
-            className="display userPlayer"
+            className={`display userPlayer ${pcHP2 === 0? "imgopacity" : ""}`}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
               pcPokemonId[1] + 1
             }.png`}
@@ -630,7 +633,7 @@ export default function Fight({ activeUser }) {
           <div>
             <div>
               <img
-                className="display userPlayer"
+                className={`display userPlayer ${playerHP3 === 0? "imgopacity" : ""}`}
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                   playerPokemon3 + 1
                 }.png`}
@@ -652,7 +655,7 @@ export default function Fight({ activeUser }) {
             </div>
           </div>
           <img
-            className="display userPlayer"
+            className={`display userPlayer ${pcHP3 === 0? "imgopacity" : ""}`}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
               pcPokemonId[2] + 1
             }.png`}
@@ -665,7 +668,7 @@ export default function Fight({ activeUser }) {
           <div>
             <div>
               <img
-                className="display userPlayer"
+                className={`display userPlayer ${playerHP4 === 0? "imgopacity" : ""}`}
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                   playerPokemon4 + 1
                 }.png`}
@@ -687,7 +690,7 @@ export default function Fight({ activeUser }) {
             </div>
           </div>
           <img
-            className="display userPlayer"
+            className={`display userPlayer ${pcHP4 === 0? "imgopacity" : ""}`}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
               pcPokemonId[3] + 1
             }.png`}
@@ -700,7 +703,7 @@ export default function Fight({ activeUser }) {
           <div>
             <div>
               <img
-                className="display userPlayer"
+                className={`display userPlayer ${playerHP5 === 0? "imgopacity" : ""}`}
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                   playerPokemon5 + 1
                 }.png`}
@@ -722,7 +725,7 @@ export default function Fight({ activeUser }) {
             </div>
           </div>
           <img
-            className="display userPlayer"
+            className={`display userPlayer ${pcHP5 === 0? "imgopacity" : ""}`}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
               pcPokemonId[4] + 1
             }.png`}
