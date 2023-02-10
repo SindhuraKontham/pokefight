@@ -69,6 +69,7 @@ export default function NewComponent({
             <Card.Title className="title">
               <br /> {pokemon.name}
             </Card.Title>
+
             {!btnState ? (
               <>
                 <button
