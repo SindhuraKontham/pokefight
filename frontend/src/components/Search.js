@@ -34,13 +34,10 @@ export default function Search({
   //    });
   // })
 
-  const sortByName = () => {
+  const sortByName = ((a, b) => a.name > b.name ? 1 : -1)
 
-  }
-
-  const sortByType = () => {
-
-  }
+  
+  const sortByType = ((a, b) => a.type[0] > b.type[0] ? 1 : -1) 
 
   //  const sortById = (getSortInfo) => {
   //   const sortedData = [...pokemonsInfo].sort((a, b) => {
@@ -77,14 +74,13 @@ export default function Search({
       </Col>
       <Col>
         <Dropdown className="sort" as={ButtonGroup}>
-          <Button variant="warning">Sort by...</Button>
+          <Button variant="warning">Sort</Button>
 
           <Dropdown.Toggle split variant="warning" id="dropdown-split-basic" />
 
           <Dropdown.Menu className="sort btn" >
             <Dropdown.Item onClick={sortByName}>Name</Dropdown.Item>
             <Dropdown.Item onClick={sortByType}>Types</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Col>
