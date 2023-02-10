@@ -1,9 +1,14 @@
+body {
+  font-family: "Press Start 2P", cursive;
+  font-size: small;
+}
+
 .Fightarena {
   background-image: url(./icons/fightarea.png);
   background-size: cover;
   width: 200;
   height: 100vh;
-  /* mix-blend-mode: multiply; */
+  mix-blend-mode: multiply;
 }
 
 .progress {
@@ -12,12 +17,12 @@
 }
 .playbtn {
   margin: 0 auto;
-  max-width: 250px;
-  padding: 10px 10px;
+  max-width: 150px;
+  padding: 8px 8px;
   border-radius: 10px;
-  background-color: rgb(15, 13, 117);
+  background-color: rgb(82, 110, 84);
   color: white;
-  font-size: 14;
+  font-size: 6 !important;
 }
 
 .playbtn:hover {
@@ -60,8 +65,8 @@
 .singlePokemonBack {
   margin-left: 25%;
   position: absolute;
-  top: 62%;
-  right: 45%;
+  top: 54%;
+  right: 40%;
   height: 300px;
   width: 350px;
   /* mix-blend-mode: multiply; */
@@ -73,15 +78,15 @@
 
 .randomPokemon {
   position: absolute;
-  top: 42%;
+  top: 49%;
   margin-left: 65%;
-  right: 18%;
+  right: 25%;
   height: 250px;
   width: 200px;
   /* mix-blend-mode: multiply; */
   transform: rotateY(20deg);
   animation-name: bounce-2;
-  animation-duration: 0.8s;
+  animation-duration: 1s;
   animation-iteration-count: infinite;
 }
 /* 

@@ -6,7 +6,6 @@ import Col from "react-bootstrap/Col";
 import pokedex from "./pokedex.json";
 // import { useEffect, useState } from "react";
 
-
 function PokemonList({ pokemonsInfo, cart, setCart, query, user }) {
   return (
     <div>
@@ -22,7 +21,6 @@ function PokemonList({ pokemonsInfo, cart, setCart, query, user }) {
                   cart={cart}
                   setCart={setCart}
                   user={user}
-                  poedex={pokedex}
                 />
               );
             })}

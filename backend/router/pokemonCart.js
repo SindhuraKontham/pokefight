@@ -17,7 +17,7 @@ pokemonCartRouter.post("/", createPokemon);
 pokemonCartRouter.get("/", getPokemons);
 pokemonCartRouter.get("/:user", getPokemon);
 pokemonCartRouter.get("/active", getActivePokemon);
-pokemonCartRouter.put("/:name", deletePokemon);
+pokemonCartRouter.delete("/:name", deletePokemon);
 
 
 module.exports = {

@@ -21,6 +21,7 @@ export default function NewComponent({
   const [open, setOpen] = useState(false);
 
   const handleOnClick = () => {
+
     setClick(!click);
   };
 
@@ -37,6 +38,7 @@ export default function NewComponent({
           className="cardpoke"
           border="primary"
           style={{ width: "13rem", height: "17rem" }}
+
         >
           <PokemonType id={index} name={pokemon.name} />
           <Card.Img
@@ -52,6 +54,7 @@ export default function NewComponent({
             <button className="button full">
               Full, check your cart to remove or edit{" "}
             </button>
+
           </Card.Body>
         </Card>
       ) : (
@@ -70,9 +73,8 @@ export default function NewComponent({
             <Card.Title className="title">
               <br /> {pokemon.name}
             </Card.Title>
-            {/* <Pokemon url={pokemon.url} /> */}
-            {/* <Button url={pokemon.url} btnState={btnState} cart={cart} pokemon={pokemon} setCart={setCart} setActive={setActive} user={user} handleOnClick={handleOnClick} /> */}
-            {!btnState ? (
+         {!btnState ? (
+
               <>
                 <button
                   onClick={() => {
@@ -119,6 +121,7 @@ export default function NewComponent({
                   aria-controls="example-fade-text"
                   aria-expanded={open}
                 >
+
                   More
                 </Button>
                 <Fade in={open}>
@@ -131,6 +134,7 @@ export default function NewComponent({
               <>
                 <button className="button remove"> Remove</button>
                 <button className="button more">More</button>
+
               </>
             )}
           </Card.Body>
