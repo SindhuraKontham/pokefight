@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
+import React, { useState, useEffect } from "react";
+import { Card, Button, Collapse } from "react-bootstrap";
 import PokemonType from "./PokemonType";
 import axios from "axios";
 import Pokemon from "./Pokemon";
 import "./pokemoninfo.css";
-import pokedex from "./pokedex.json";
 // import Button from "./Button";
 
 export default function NewComponent({
@@ -13,10 +12,13 @@ export default function NewComponent({
   cart,
   setCart,
   user,
+  pokedex,
   setClick,
   click,
 }) {
+  
   const [btnState, setBtnState] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleOnClick = () => {
     setClick(!click);
@@ -46,7 +48,6 @@ export default function NewComponent({
             <Card.Title className="title">
               <br /> {pokemon.name}
             </Card.Title>
-            <Pokemon url={pokemon.url} />
             <button className="button full">
               Full, check your cart to remove or edit{" "}
             </button>
@@ -110,14 +111,36 @@ export default function NewComponent({
                   {" "}
                   Add
                 </button>
-                <button onClick={handleOnClick} className="button more">
+                <Button
+                  onClick={() => setOpen(!open)}
+                  className="button more"
+                  aria-controls="poke-info"
+                  aria-expanded={open}
+                >
                   More
-                </button>
+                </Button>
+                <Collapse in={open}>
+                  <div id="poke-info">
+                    <Pokemon url={pokemon.url} />
+                  </div>
+                </Collapse>
               </>
             ) : (
               <>
                 <button className="button remove"> Remove</button>
-                <button className="button more">More</button>
+                <Button
+                  onClick={() => setOpen(!open)}
+                  className="button more"
+                  aria-controls="poke-info"
+                  aria-expanded={open}
+                >
+                  More
+                </Button>
+                <Collapse in={open}>
+                  <div id="poke-info">
+                    <Pokemon url={pokemon.url} />
+                  </div>
+                </Collapse>  
               </>
             )}
           </Card.Body>
