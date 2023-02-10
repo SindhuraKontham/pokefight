@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import pokedex from "./pokedex.json";
 import "./fightarena.css";
+import "./displayPokemons.css";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import Ball from "./icons/pokemonball.png";
 
 export default function Fight({ activeUser }) {
-  console.log(activeUser)
+  console.log(activeUser);
   const [playerPokemonsId, setPlayerPokemonsId] = useState([]);
   const [playerPokemon1, setPlayerPokemon1] = useState(0);
   const [playerPokemon2, setPlayerPokemon2] = useState(1);
@@ -33,6 +36,21 @@ export default function Fight({ activeUser }) {
       if (pcPokemonId.indexOf(r) === -1) pcPokemonId.push(r);
     }
     setPcPokemonId(pcPokemonId);
+    setImagePCPokemon1(
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[0]}.png`
+    );
+    setImagePCPokemon2(
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[1]}.png`
+    );
+    setImagePCPokemon3(
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[2]}.png`
+    );
+    setImagePCPokemon4(
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`
+    );
+    setImagePCPokemon5(
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`
+    );
   }, []);
 
   //   Pc Pokemons Indexes:
@@ -43,19 +61,13 @@ export default function Fight({ activeUser }) {
   const pcPokemon4 = pcPokemonId[3];
   const pcPokemon5 = pcPokemonId[4];
 
-  // const pcPokemonImageurl1 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[0]]?.name.english.toLowerCase()}`;
-  // const pcPokemonImageurl2 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[1]]?.name.english.toLowerCase()}`;
-  // const pcPokemonImageurl3 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[2]]?.name.english.toLowerCase()}`;
-  // const pcPokemonImageurl4 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[3]]?.name.english.toLowerCase()}`;
-  // const pcPokemonImageurl5 = `https://pokeapi.co/api/v2/pokemon/${pokedex[pcPokemonId[4]]?.name.english.toLowerCase()}`;
-  // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png
-
-  const pcPokemonImageurl1 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[0]}.png`
-  const pcPokemonImageurl2 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[1]}.png`
-  const pcPokemonImageurl3 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[2]}.png`
-  const pcPokemonImageurl4 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`
-  const pcPokemonImageurl5 =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`
-
+  const computerPlayers = [
+    imagePCPokemon1,
+    imagePCPokemon2,
+    imagePCPokemon3,
+    imagePCPokemon4,
+    imagePCPokemon5,
+  ];
 
   //   Get Request to the pokemon cart:
 
@@ -64,14 +76,14 @@ export default function Fight({ activeUser }) {
       try {
         const response = await axios.get("http://localhost:3001/pokemonCart/");
         const res = response.data;
-       
+
         //   Filter the array of pokemons from the active user:
         let userPokemons = res.filter(
           (item) => item.user === activeUser.username
         );
         //   Extract array of indexes
         setPlayerPokemonsId(userPokemons.map((a) => a.pok_id));
-       
+
         //   Extract index of each Pokemon
         setPlayerPokemon1(userPokemons[0].pok_id);
         setPlayerPokemon2(userPokemons[1].pok_id);
@@ -79,72 +91,28 @@ export default function Fight({ activeUser }) {
         setPlayerPokemon4(userPokemons[3].pok_id);
         setPlayerPokemon5(userPokemons[4].pok_id);
 
-
-
-        setImagePokemon1(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[0].pok_id}.png`);
-        setImagePokemon2(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[1].pok_id}.png`);
-        setImagePokemon3(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[2].pok_id}.png`);
-        setImagePokemon4(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[3].pok_id}.png`);
-        setImagePokemon5(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[4].pok_id}.png`);
-        
-        // console.log(imagePokemon1,imagePokemon2,imagePokemon3,imagePokemon4,imagePokemon5)
-      //   axios
-      //   .get(
-      //     pcPokemonImageurl1
-      //   )
-      //   .then((data1) => {
-      //     setImagePCPokemon1(data1.data.sprites.back_default);
-      //   })
-
-      //   .get(
-      //     pcPokemonImageurl2
-      //   )
-      //   .then((data2) => {
-      //     setImagePCPokemon2(data2.data.sprites.back_default);
-      //   })
-
-      //   .get(
-      //     pcPokemonImageurl3
-      //   )
-      //   .then((data3) => {
-      //     setImagePCPokemon3(data3.data.sprites.back_default);
-      //   })
-
-      //  .get(
-      //     pcPokemonImageurl4
-      //   )
-      //   .then((data4) => {
-      //     setImagePCPokemon4(data4.data.sprites.back_default);
-      //   })
-
-      //   .get(
-      //     pcPokemonImageurl5
-      //   )
-      //   .then((data5) => {
-      //     setImagePCPokemon5(data5.data.sprites.back_default);
-      //   })
-
-      } 
-      
-      
-      catch (err) {
+        setImagePokemon1(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[0].pok_id}.png`
+        );
+        setImagePokemon2(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[1].pok_id}.png`
+        );
+        setImagePokemon3(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[2].pok_id}.png`
+        );
+        setImagePokemon4(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[3].pok_id}.png`
+        );
+        setImagePokemon5(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[4].pok_id}.png`
+        );
+      } catch (err) {
         console.log(err);
       }
     };
     data();
   }, [activeUser.username]);
-
   //   Get 5 random pokemons for PC:
-
-
-    
-
-  console.log(imagePCPokemon1
-    ,imagePCPokemon2
-    ,imagePCPokemon3
-    ,imagePCPokemon4
-    ,imagePCPokemon5)
-
   let pcPokemons = pcPokemonId;
 
   //   more difficulty (0-1) means more special attacks for the PC and less to Player:
@@ -415,49 +383,307 @@ export default function Fight({ activeUser }) {
 
   return (
     <div className="Fightarena">
-      <h1>
-        PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
-      </h1>
-      <button
-        onClick={SelectPokemon1}
-        disabled={playerHP1 === 0 ? true : false}
-      >
-        Pokemon 1 {playerHP1}
-      </button>
-      <button
-        onClick={SelectPokemon2}
-        disabled={playerHP2 === 0 ? true : false}
-      >
-        Pokemon 2 {playerHP2}
-      </button>
-      <button
-        onClick={SelectPokemon3}
-        disabled={playerHP3 === 0 ? true : false}
-      >
-        Pokemon 3 {playerHP3}
-      </button>
-      <button
-        onClick={SelectPokemon4}
-        disabled={playerHP4 === 0 ? true : false}
-      >
-        Pokemon 4 {playerHP4}
-      </button>
-      <button
-        onClick={SelectPokemon5}
-        disabled={playerHP5 === 0 ? true : false}
-      >
-        Pokemon 5 {playerHP5}
-      </button>
-      <button onClick={ChangePokemon}>Change Pokemon </button>
-      <div className="bounce-2 ">
-      {playerActivePokemon === playerPokemon1 ? (<img  className="singlePokemonBack bounce-2 " src = {imagePokemon1} />) : 
-        playerActivePokemon === playerPokemon2 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon2}/>) :
-        playerActivePokemon === playerPokemon3 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon3}/>) :
-        playerActivePokemon === playerPokemon4 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon4}/>) :
-        playerActivePokemon === playerPokemon5 ? (<img className="singlePokemonBack bounce-2 " src = {imagePokemon5}/>): (
-          <img  className="singlePokemonBack bounce-2 " src = {imagePokemon1} />
-        ) }
+      <div>
+        {/* <DisplayPokemons props = {props} classname="userPlayer"/> */}
+        <div className="span">
+          <div>
+            <div>
+              <img
+                className="display userPlayer"
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon1}.png`}
+                alt="userpokemons"
+                width={150}
+                height={110}
+              />
+            </div>
+            <div>
+              <button
+                className="playbtn"
+                onClick={SelectPokemon1}
+                disabled={playerHP1 === 0 ? true : false}
+              >
+                Pokemon 1 || {playerHP1}
+              </button>
+            </div>
+          </div>
+          <button
+          className="pokball"
+          onClick={ChangePokemon}><img
+              src={Ball}
+              // src={Pokeball}
+              alt="Pokeball"
+              style={{ width: "6rem", height: "6rem" }}
+            /> </button>
+      <div>
+      <button className="plybtn" onClick={PlayerAttack} style={{ width: "12rem", height: "4rem" }}>PLAYER: attack</button>
+      {playerSpAttack && (
+        <button className="plybtn" onClick={PlayerSpAttack} style={{width: "12rem", height: "4rem"  }}>PLAYER: special attack</button>
+        )}
+      </div>
+     
+  
+          
+          <img
+            className="display userPlayer"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[0]}.png`}
+            alt="userpokemons"
+            width={150}
+            height={110}
+          />
         </div>
+        <div className="span">
+          <div>
+            <div>
+              <img
+                className="display userPlayer"
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon2}.png`}
+                alt="userpokemons"
+                width={150}
+                height={110}
+              />
+            </div>
+            <div>
+              <button
+                className="playbtn"
+                onClick={SelectPokemon2}
+                disabled={playerHP2 === 0 ? true : false}
+              >
+                Pokemon 2|| {playerHP2}
+              </button>
+            </div>
+          </div>
+          <img
+            className="display userPlayer"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[1]}.png`}
+            alt="userpokemons"
+            width={150}
+            height={110}
+          />
+        </div>
+        <div className="span">
+          <div>
+            <div>
+              <img
+                className="display userPlayer"
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon3}.png`}
+                alt="userpokemons"
+                width={150}
+                height={110}
+              />
+            </div>
+            <div>
+              <button
+                className="playbtn"
+                onClick={SelectPokemon3}
+                disabled={playerHP3 === 0 ? true : false}
+              >
+                Pokemon 3 {playerHP3}
+              </button>
+            </div>
+          </div>
+          <img
+            className="display userPlayer"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[2]}.png`}
+            alt="userpokemons"
+            width={150}
+            height={110}
+          />
+        </div>
+        <div className="span">
+          <div>
+            <div>
+              <img
+                className="display userPlayer"
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon4}.png`}
+                alt="userpokemons"
+                width={150}
+                height={110}
+              />
+            </div>
+            <div>
+              <button
+                className="playbtn"
+                onClick={SelectPokemon4}
+                disabled={playerHP3 === 0 ? true : false}
+              >
+                Pokemon 4 || {playerHP4}
+              </button>
+            </div>
+          </div>
+          <img
+            className="display userPlayer"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`}
+            alt="userpokemons"
+            width={150}
+            height={110}
+          />
+        </div>
+        <div className="span">
+          <div>
+            <div>
+              <img
+                className="display userPlayer"
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon5}.png`}
+                alt="userpokemons"
+                width={150}
+                height={110}
+              />
+            </div>
+            <div>
+              <button
+                className="playbtn"
+                onClick={SelectPokemon5}
+                disabled={playerHP5 === 0 ? true : false}
+              >
+                Pokemon 5 || {playerHP5}
+              </button>
+            </div>
+          </div>
+          <img
+            className="display userPlayer"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`}
+            alt="userpokemons"
+            width={150}
+            height={110}
+          />
+        </div>
+      </div>
+
+      {/* <h1>
+        PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
+      </h1> */}
+
+     
+
+      <div className="bouncy">
+      <div className="bounce-2 ">
+        {playerActivePokemon === playerPokemon1 ? (
+          <div className="singlePokemonBack bounce-2 ">
+            <h6>
+              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
+              <ProgressBar className="progress" animated now={playerHP} />
+            </h6>
+            <img src={imagePokemon1} className="singlePokemonBack bounce-2 " />
+          </div>
+        ) : playerActivePokemon === playerPokemon2 ? (
+          <div className="singlePokemonBack bounce-2 ">
+            {" "}
+            <h6>
+              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
+              <ProgressBar className="progress" animated now={playerHP} />
+            </h6>
+            <img src={imagePokemon2} className="singlePokemonBack bounce-2 " />
+          </div>
+        ) : playerActivePokemon === playerPokemon3 ? (
+          <div className="singlePokemonBack bounce-2 ">
+            {" "}
+            <h6>
+              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
+              <ProgressBar className="progress" animated now={playerHP} />
+            </h6>
+            <img src={imagePokemon3} className="singlePokemonBack bounce-2 " />
+          </div>
+        ) : playerActivePokemon === playerPokemon4 ? (
+          <div className="singlePokemonBack bounce-2 ">
+            {" "}
+            <h6>
+              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
+              <ProgressBar className="progress" animated now={playerHP} />
+            </h6>
+            <img src={imagePokemon4} className="singlePokemonBack bounce-2 " />
+          </div>
+        ) : playerActivePokemon === playerPokemon5 ? (
+          <div className="singlePokemonBack bounce-2 ">
+            {" "}
+            <h6>
+              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
+              <ProgressBar className="progress" animated now={playerHP} />
+            </h6>
+            <img src={imagePokemon5} className="singlePokemonBack bounce-2 " />
+          </div>
+        ) : (
+          <div className="singlePokemonBack bounce-2 ">
+            {" "}
+            <h6>
+              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
+              <ProgressBar className="progress" animated now={playerHP} />
+            </h6>
+            <img className="singlePokemonBack bounce-2 " src={imagePokemon1} />
+          </div>
+        )}
+      </div>
+      <div className="bounce-2 ">
+          {pcActivePokemon === pcPokemon1 ? (
+            <div className="randomPokemon bounce-2">
+              <h6>
+                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
+                <ProgressBar className="progress" animated now={pcHP} />
+              </h6>
+              <img src={imagePCPokemon1} className="randomPokemon bounce-2" />
+            </div>
+          ) : pcActivePokemon === pcPokemon2 ? (
+            <div className="randomPokemon bounce-2">
+              {" "}
+              <h6>
+                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
+                <ProgressBar className="progress" animated now={pcHP} />
+              </h6>
+              <img src={imagePCPokemon2} className="randomPokemon bounce-2" />
+            </div>
+          ) : pcActivePokemon === pcPokemon3 ? (
+            <div className="randomPokemon bounce-2">
+              {" "}
+              <h6>
+                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
+                <ProgressBar className="progress" animated now={pcHP} />
+              </h6>
+              <img src={imagePCPokemon3} className="randomPokemon bounce-2" />
+            </div>
+          ) : pcActivePokemon === pcPokemon4 ? (
+            <div className="randomPokemon bounce-2">
+              {" "}
+              <h6>
+                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
+                <ProgressBar className="progress" animated now={pcHP} />
+              </h6>
+              <img src={imagePCPokemon4} className="randomPokemon bounce-2" />
+            </div>
+          ) : pcActivePokemon === pcPokemon5 ? (
+            <div className="randomPokemon bounce-2">
+              {" "}
+              <h6>
+                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
+                <ProgressBar className="progress" animated now={pcHP} />
+              </h6>
+              <img src={imagePCPokemon5} className="randomPokemon bounce-2" />
+            </div>
+          ) : (
+            <div className="randomPokemon bounce-2">
+              {" "}
+              <h6>
+                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
+                <ProgressBar className="progress" animated now={pcHP} />
+              </h6>
+              <img className="randomPokemon bounce-2" src={imagePCPokemon1} />
+            </div>
+          )}
+        </div>
+      </div>
+      {/* <div className="bounce-2 ">
+        {playerActivePokemon === playerPokemon1 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon1} />
+        ) : playerActivePokemon === playerPokemon2 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon2} />
+        ) : playerActivePokemon === playerPokemon3 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon3} />
+        ) : playerActivePokemon === playerPokemon4 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon4} />
+        ) : playerActivePokemon === playerPokemon5 ? (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon5} />
+        ) : (
+          <img className="singlePokemonBack bounce-2 " src={imagePokemon1} />
+        )}
+      </div> */}
       <p>Attack: {`${pokedex[playerActivePokemon].base.Attack}`} </p>
       <p>Defense: {`${pokedex[playerActivePokemon].base.Defense}`} </p>
       <p>
@@ -467,24 +693,9 @@ export default function Fight({ activeUser }) {
         Special Defense: {`${pokedex[playerActivePokemon].base["Sp. Defense"]}`}{" "}
       </p>
       <p>Speed: {`${pokedex[playerActivePokemon].base.Speed}`} </p>
-      <button onClick={PlayerAttack}>PLAYER: attack</button>
-      {playerSpAttack && (
-        <button onClick={PlayerSpAttack}>PLAYER: special attack</button>
-      )}
+     
       <div>
-        <h1>
-          PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
-        </h1>
-
-        <div className="bounce-2 " >
-      { pcActivePokemon === pcPokemon1 ? (<img  src ={pcPokemonImageurl1} className="randomPokemon" />) : 
-        pcActivePokemon === pcPokemon2 ? (<img src = {pcPokemonImageurl2} className="randomPokemon"/>) :
-        pcActivePokemon === pcPokemon3 ? (<img src = {pcPokemonImageurl3} className="randomPokemon"/>) :
-        pcActivePokemon === pcPokemon4 ? (<img src = {pcPokemonImageurl4} className="randomPokemon"/>) :
-        pcActivePokemon === pcPokemon5 ? (<img src = {pcPokemonImageurl5} className="randomPokemon"/>): (
-          <img className="randomPokemon" src = {pcPokemonImageurl1}/>
-        ) }
-        </div>
+        
         <p>PcActivePoki: {pcActivePokemon} </p>
         <p>Attack: {`${pokedex[pcActivePokemon].base.Defense}`} </p>
         <p>Defense: {`${pokedex[pcActivePokemon].base.Defense}`} </p>

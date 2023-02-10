@@ -1,15 +1,12 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import FightArena from "./components/FightArena";
 import User from "./components/User";
 import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
 import PokemonInfo from "./components/PokemonInfo";
-import Navbar from "./components/Navbar";
 import Fight from "./components/Fight";
 
 function App() {
@@ -29,12 +26,8 @@ function App() {
         const respoke = pokemon.data;
         setActiveUser(res);
         setPokemons(respoke);
-        // console.log(res);
-        // console.log(respoke);
         return res, respoke;
         setPokemons(res);
-        // console.log(res);
-        // console.log(activeUser);
         return res;
       } catch (err) {
         console.log(err);
@@ -44,8 +37,7 @@ function App() {
   }, []);
   console.log(cart);
 
-  const cartQuantity = cart.length
- 
+  const cartQuantity = cart.length;
 
   const openCart = () => {
     setIsOpen(true);
@@ -54,51 +46,59 @@ function App() {
     setIsOpen(false);
   };
 
-  const quantity = cart.length
+  const quantity = cart.length;
 
   return (
     <>
-      {/* <Container> */}
-        <Routes>
-          <Route path="/" element={<User setActiveUser={setActiveUser}  activeUser={activeUser}/> } />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <User setActiveUser={setActiveUser} activeUser={activeUser} />
+          }
+        />
 
-          <Route path="/Fight" element={<Fight activeUser={activeUser} />} />
-          <Route
-            path="/CreateUser"
-            element={<CreateNewUser  activeUser={activeUser} setActiveUser={setActiveUser} />}
-          />
-          <Route
-            path="/pokemons"
-            element={
-              <PokemonInfo
-                cart={cart}
-                setCart={setCart}
-                setSearchResults={setSearchResults}
-                pokemonsInfo={pokemonsInfo}
-                setPokemonsInfo={setPokemonsInfo}
-                user={activeUser}
-                setActiveUser={setActiveUser}
-                cartQuantity={cartQuantity}
-              />
-            }
-          />
-          <Route
-            path="/cart"
-            element={
-              <PokeCart
-                cart={cart}
-                setCart={setCart}
-                cartQuantity={cartQuantity}
-                openCart={openCart}
-                closeCart={closeCart}
-                isOpen={isOpen}
-                activeUser={activeUser}
-                setActiveUser={setActiveUser}
-              />
-            }
-          />
-        </Routes>
-      {/* </Container> */}
+        <Route path="/Fight" element={<Fight activeUser={activeUser} />} />
+        <Route
+          path="/CreateUser"
+          element={
+            <CreateNewUser
+              activeUser={activeUser}
+              setActiveUser={setActiveUser}
+            />
+          }
+        />
+        <Route
+          path="/pokemons"
+          element={
+            <PokemonInfo
+              cart={cart}
+              setCart={setCart}
+              setSearchResults={setSearchResults}
+              pokemonsInfo={pokemonsInfo}
+              setPokemonsInfo={setPokemonsInfo}
+              user={activeUser}
+              setActiveUser={setActiveUser}
+              cartQuantity={cartQuantity}
+            />
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <PokeCart
+              cart={cart}
+              setCart={setCart}
+              cartQuantity={cartQuantity}
+              openCart={openCart}
+              closeCart={closeCart}
+              isOpen={isOpen}
+              activeUser={activeUser}
+              setActiveUser={setActiveUser}
+            />
+          }
+        />
+      </Routes>
     </>
   );
 }

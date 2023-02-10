@@ -43,9 +43,9 @@ const createPokemon = async (req, res) => {
 
   const deletePokemon = async (req, res) => {
     const { name } = req.params;
+   
     try {
-      const pokemon = await Pokemon.findOneAndDelete({ name } )
-      pokemon.save()
+      const pokemon = await Pokemon.deleteOne( { pokeName: name } )
       res.json(pokemon);
       
     } catch (error) {
