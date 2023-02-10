@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, Button, Fade } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Card, Button, Collapse } from "react-bootstrap";
 import PokemonType from "./PokemonType";
 import axios from "axios";
 import Pokemon from "./Pokemon";
@@ -16,12 +16,16 @@ export default function NewComponent({
   setClick,
   click,
 }) {
-  console.log(pokemon)
+  console.log(pokemon);
   const [btnState, setBtnState] = useState(false);
   const [open, setOpen] = useState(false);
+  // const [data, setPokemonsInfo] = useState([])
+
+  // useEffect(() => {
+  //   setData(props.data)
+  // }, [])
 
   const handleOnClick = () => {
-
     setClick(!click);
   };
 
@@ -38,7 +42,6 @@ export default function NewComponent({
           className="cardpoke"
           border="primary"
           style={{ width: "13rem", height: "17rem" }}
-
         >
           <PokemonType id={index} name={pokemon.name} />
           <Card.Img
@@ -54,7 +57,6 @@ export default function NewComponent({
             <button className="button full">
               Full, check your cart to remove or edit{" "}
             </button>
-
           </Card.Body>
         </Card>
       ) : (
@@ -73,8 +75,7 @@ export default function NewComponent({
             <Card.Title className="title">
               <br /> {pokemon.name}
             </Card.Title>
-         {!btnState ? (
-
+            {!btnState ? (
               <>
                 <button
                   onClick={() => {
@@ -121,20 +122,18 @@ export default function NewComponent({
                   aria-controls="example-fade-text"
                   aria-expanded={open}
                 >
-
                   More
                 </Button>
-                <Fade in={open}>
-                  <div id="example-fade-text">
-                  <Pokemon url={pokemon.url} />
+                <Collapse in={open}>
+                  <div id="example-collapse-text">
+                    <Pokemon url={pokemon.url} />
                   </div>
-                </Fade>
+                </Collapse>
               </>
             ) : (
               <>
                 <button className="button remove"> Remove</button>
                 <button className="button more">More</button>
-
               </>
             )}
           </Card.Body>
