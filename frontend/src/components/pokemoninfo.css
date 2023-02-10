@@ -101,7 +101,8 @@
 
 .more {
   background-color: rgb(161, 159, 159);
-  font-size: 12px;
+  font-size: 13px;
+  color: black;
   font-family: "Press Start 2P", cursive;
   background-color: rgba(49, 175, 133, 0.766);
 }
