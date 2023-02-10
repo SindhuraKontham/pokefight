@@ -1,15 +1,12 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import FightArena from "./components/FightArena";
 import User from "./components/User";
 import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
 import PokemonInfo from "./components/PokemonInfo";
-import Navbar from "./components/Navbar";
 import Fight from "./components/Fight";
 import Score from "./components/Score";
 
@@ -30,12 +27,8 @@ function App() {
         const respoke = pokemon.data;
         setActiveUser(res);
         setPokemons(respoke);
-        // console.log(res);
-        // console.log(respoke);
         return res, respoke;
         setPokemons(res);
-        // console.log(res);
-        // console.log(activeUser);
         return res;
       } catch (err) {
         console.log(err);
@@ -58,7 +51,6 @@ function App() {
 
   return (
     <>
-      {/* <Container> */}
       <Routes>
         <Route
           path="/"
@@ -109,7 +101,6 @@ function App() {
           }
         />
       </Routes>
-      {/* </Container> */}
     </>
   );
 }
