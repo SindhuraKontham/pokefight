@@ -8,6 +8,7 @@ import CreateNewUser from "./components/CreateNewUser";
 import PokeCart from "./components/PokeCart";
 import PokemonInfo from "./components/PokemonInfo";
 import Fight from "./components/Fight";
+import Score from "./components/Score";
 
 function App() {
   const [pokemons, setPokemons] = useState([]); // eslint-disable-next-line
@@ -57,6 +58,7 @@ function App() {
             <User setActiveUser={setActiveUser} activeUser={activeUser} />
           }
         />
+        <Route path="/Score" element={<Score activeUser={activeUser} />} />
 
         <Route path="/Fight" element={<Fight activeUser={activeUser} />} />
         <Route

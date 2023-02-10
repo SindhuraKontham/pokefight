@@ -1,10 +1,10 @@
 const Fight = require("../model/fight");
 
 const createFight = async (req, res) => {
-    const { active, user, userPokemon1, userPokemon2, userPokemon3,userPokemon4,userPokemon5,pcPokemon1,pcPokemon2,pcPokemon3,pcPokemon4,pcPokemon5,winner,userPoints} = req.body;
+    const { active, user, img, winner,score} = req.body;
     // console.log(req.body)
     try {
-      const fight = await Fight.create({ active:active, user:user, userPokemon1:userPokemon1, userPokemon2:userPokemon2, userPokemon3:userPokemon3,userPokemon4:userPokemon4,userPokemon5:userPokemon5,pcPokemon1:pcPokemon1,pcPokemon2:pcPokemon2,pcPokemon3:pcPokemon3,pcPokemon4:pcPokemon4,pcPokemon5:pcPokemon5,winner:winner,userPoints:userPoints});
+      const fight = await Fight.create({ active:active, user:user, img:img ,winner:winner,score:score});
       res.status(201).json(fight);
     } catch (error) {
       console.log(error.message)
