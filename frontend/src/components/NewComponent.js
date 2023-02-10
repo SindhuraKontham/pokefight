@@ -68,8 +68,6 @@ export default function NewComponent({
             <Card.Title className="title">
               <br /> {pokemon.name}
             </Card.Title>
-            <Pokemon url={pokemon.url} />
-            {/* <Button url={pokemon.url} btnState={btnState} cart={cart} pokemon={pokemon} setCart={setCart} setActive={setActive} user={user} handleOnClick={handleOnClick} /> */}
 
             {!btnState ? (
               <>
