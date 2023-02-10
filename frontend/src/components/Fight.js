@@ -806,9 +806,7 @@ export default function Fight({ activeUser }) {
           )}
         </div>
       </div>
-      {/* <div className="bounce-2 ">
-
-      </div>
+   
       <p>Attack: {`${pokedex[playerActivePokemon].base.Attack}`} </p>
       <p>Defense: {`${pokedex[playerActivePokemon].base.Defense}`} </p>
       <p>
