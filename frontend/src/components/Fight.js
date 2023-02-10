@@ -7,7 +7,6 @@ import "./displayPokemons.css";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Ball from "./icons/pokemonball.png";
 import { Navigate } from "react-router-dom";
-import Score from "./Score";
 
 export default function Fight({ activeUser }) {
   console.log(activeUser);
@@ -31,6 +30,7 @@ export default function Fight({ activeUser }) {
   const [imagePCPokemon4, setImagePCPokemon4] = useState("");
   const [imagePCPokemon5, setImagePCPokemon5] = useState("");
   const [gameOver, setGameOver] = useState(false);
+  const [pokeballActive, setPokeballActive] = useState(false);
 
   useEffect(() => {
     const pcPokemonId = [];
@@ -40,19 +40,29 @@ export default function Fight({ activeUser }) {
     }
     setPcPokemonId(pcPokemonId);
     setImagePCPokemon1(
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[0]}.png`
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+        pcPokemonId[0] + 1
+      }.png`
     );
     setImagePCPokemon2(
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[1]}.png`
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+        pcPokemonId[1] + 1
+      }.png`
     );
     setImagePCPokemon3(
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[2]}.png`
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+        pcPokemonId[2] + 1
+      }.png`
     );
     setImagePCPokemon4(
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+        pcPokemonId[3] + 1
+      }.png`
     );
     setImagePCPokemon5(
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+        pcPokemonId[4] + 1
+      }.png`
     );
   }, []);
 
@@ -63,7 +73,6 @@ export default function Fight({ activeUser }) {
   const pcPokemon3 = pcPokemonId[2];
   const pcPokemon4 = pcPokemonId[3];
   const pcPokemon5 = pcPokemonId[4];
-
 
   const computerPlayers = [
     imagePCPokemon1,
@@ -96,19 +105,29 @@ export default function Fight({ activeUser }) {
         setPlayerPokemon5(userPokemons[4].pok_id);
 
         setImagePokemon1(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[0].pok_id}.png`
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${
+            userPokemons[0].pok_id + 1
+          }.png`
         );
         setImagePokemon2(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[1].pok_id}.png`
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${
+            userPokemons[1].pok_id + 1
+          }.png`
         );
         setImagePokemon3(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[2].pok_id}.png`
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${
+            userPokemons[2].pok_id + 1
+          }.png`
         );
         setImagePokemon4(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[3].pok_id}.png`
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${
+            userPokemons[3].pok_id + 1
+          }.png`
         );
         setImagePokemon5(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${userPokemons[4].pok_id}.png`
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${
+            userPokemons[4].pok_id + 1
+          }.png`
         );
       } catch (err) {
         console.log(err);
@@ -138,17 +157,41 @@ export default function Fight({ activeUser }) {
   const [playerActivePokemon, setPlayerActivePokemon] =
     useState(playerPokemon1);
 
-  const [playerHP1, setPlayerHP1] = useState(pokedex[playerPokemon1].base.HP);
-  const [playerHP2, setPlayerHP2] = useState(pokedex[playerPokemon2].base.HP);
-  const [playerHP3, setPlayerHP3] = useState(pokedex[playerPokemon3].base.HP);
-  const [playerHP4, setPlayerHP4] = useState(pokedex[playerPokemon4].base.HP);
-  const [playerHP5, setPlayerHP5] = useState(pokedex[playerPokemon5].base.HP);
+  const [playerHP1, setPlayerHP1] = useState();
+  const [playerHP2, setPlayerHP2] = useState();
+  const [playerHP3, setPlayerHP3] = useState();
+  const [playerHP4, setPlayerHP4] = useState();
+  const [playerHP5, setPlayerHP5] = useState();
 
-  const [pcHP1, setPcHP1] = useState(pokedex[pcPokemon1].base.HP);
-  const [pcHP2, setPcHP2] = useState(pokedex[pcPokemon2].base.HP);
-  const [pcHP3, setPcHP3] = useState(pokedex[pcPokemon3].base.HP);
-  const [pcHP4, setPcHP4] = useState(pokedex[pcPokemon4].base.HP);
-  const [pcHP5, setPcHP5] = useState(pokedex[pcPokemon5].base.HP);
+  const [pcHP1, setPcHP1] = useState();
+  const [pcHP2, setPcHP2] = useState();
+  const [pcHP3, setPcHP3] = useState();
+  const [pcHP4, setPcHP4] = useState();
+  const [pcHP5, setPcHP5] = useState();
+
+  useEffect(() => {
+    setPcHP1(pokedex[pcPokemon1].base.HP);
+    setPcHP2(pokedex[pcPokemon2].base.HP);
+    setPcHP3(pokedex[pcPokemon3].base.HP);
+    setPcHP4(pokedex[pcPokemon4].base.HP);
+    setPcHP5(pokedex[pcPokemon5].base.HP);
+    setPlayerHP1(pokedex[playerPokemon1].base.HP);
+    setPlayerHP2(pokedex[playerPokemon2].base.HP);
+    setPlayerHP3(pokedex[playerPokemon3].base.HP);
+    setPlayerHP4(pokedex[playerPokemon4].base.HP);
+    setPlayerHP5(pokedex[playerPokemon5].base.HP);
+  }, [
+    pokedex[pcPokemon1].base.HP,
+    pokedex[pcPokemon2].base.HP,
+    pokedex[pcPokemon3].base.HP,
+    pokedex[pcPokemon4].base.HP,
+    pokedex[pcPokemon5].base.HP,
+    pokedex[playerPokemon1].base.HP,
+    pokedex[playerPokemon2].base.HP,
+    pokedex[playerPokemon3].base.HP,
+    pokedex[playerPokemon4].base.HP,
+    pokedex[playerPokemon5].base.HP,
+  ]);
 
   const [playerSpAttack, setPlayerSpAttack] = useState(
     Math.random() > difficulty ? true : false
@@ -156,12 +199,12 @@ export default function Fight({ activeUser }) {
   const [pcSpAttack, setPcSpAttack] = useState(
     Math.random() > difficulty ? false : true
   );
+  const [playerUsingSpA, setPlayerUsingSpA] = useState(false);
 
   //   On pc Pokemon change action changes randomly after each attack
 
   const SavePcHPandChange = () => {
     if (pcActivePokemon === pcPokemon1) {
-      setPcHP1(pcHP);
       if (pcHP5 > 0) {
         setPcActivePokemon(pcPokemonId[4]);
       } else if (pcHP2 > 0) {
@@ -170,13 +213,10 @@ export default function Fight({ activeUser }) {
         setPcActivePokemon(pcPokemonId[3]);
       } else if (pcHP3 > 0) {
         setPcActivePokemon(pcPokemonId[2]);
-      } else if (pcHP1 > 0) {
-        setPcActivePokemon(pcPokemonId[0]);
       } else {
-        alert("Game over");
+        setPcActivePokemon(pcPokemonId[0]);
       }
     } else if (pcActivePokemon === pcPokemon2) {
-      setPcHP2(pcHP);
       if (pcHP1 > 0) {
         setPcActivePokemon(pcPokemonId[0]);
       } else if (pcHP5 > 0) {
@@ -185,13 +225,10 @@ export default function Fight({ activeUser }) {
         setPcActivePokemon(pcPokemonId[3]);
       } else if (pcHP2 > 0) {
         setPcActivePokemon(pcPokemonId[1]);
-      } else if (pcHP3 > 0) {
-        setPcActivePokemon(pcPokemonId[2]);
       } else {
-        alert("Game over");
+        setPcActivePokemon(pcPokemonId[2]);
       }
     } else if (pcActivePokemon === pcPokemon3) {
-      setPcHP3(pcHP);
       if (pcHP3 > 0) {
         setPcActivePokemon(pcPokemonId[2]);
       } else if (pcHP5 > 0) {
@@ -200,13 +237,10 @@ export default function Fight({ activeUser }) {
         setPcActivePokemon(pcPokemonId[3]);
       } else if (pcHP2 > 0) {
         setPcActivePokemon(pcPokemonId[1]);
-      } else if (pcHP1 > 0) {
-        setPcActivePokemon(pcPokemonId[0]);
       } else {
-        alert("Game over");
+        setPcActivePokemon(pcPokemonId[0]);
       }
     } else if (pcActivePokemon === pcPokemon4) {
-      setPcHP4(pcHP);
       if (pcHP2 > 0) {
         setPcActivePokemon(pcPokemonId[1]);
       } else if (pcHP3 > 0) {
@@ -215,13 +249,10 @@ export default function Fight({ activeUser }) {
         setPcActivePokemon(pcPokemonId[3]);
       } else if (pcHP5 > 0) {
         setPcActivePokemon(pcPokemonId[4]);
-      } else if (pcHP1 > 0) {
-        setPcActivePokemon(pcPokemonId[0]);
       } else {
-        alert("Game over");
+        setPcActivePokemon(pcPokemonId[0]);
       }
     } else {
-      setPcHP5(pcHP);
       if (pcHP1 > 0) {
         setPcActivePokemon(pcPokemonId[0]);
       } else if (pcHP3 > 0) {
@@ -230,25 +261,9 @@ export default function Fight({ activeUser }) {
         setPcActivePokemon(pcPokemonId[3]);
       } else if (pcHP2 > 0) {
         setPcActivePokemon(pcPokemonId[1]);
-      } else if (pcHP5 > 0) {
-        setPcActivePokemon(pcPokemonId[4]);
       } else {
-        alert("Game over");
+        setPcActivePokemon(pcPokemonId[4]);
       }
-    }
-  };
-
-  const RefreshPcHP = () => {
-    if (pcActivePokemon === pcPokemon1) {
-      setPcHP(pcHP1);
-    } else if (pcActivePokemon === pcPokemon2) {
-      setPcHP(pcHP2);
-    } else if (pcActivePokemon === pcPokemon3) {
-      setPcHP(pcHP3);
-    } else if (pcActivePokemon === pcPokemon4) {
-      setPcHP(pcHP4);
-    } else {
-      setPcHP(pcHP5);
     }
   };
 
@@ -256,147 +271,127 @@ export default function Fight({ activeUser }) {
 
   const SelectPokemon1 = () => {
     setPlayerActivePokemon(playerPokemon1);
-    setPlayerHP(playerHP1);
+    setPokeballActive(false);
   };
 
   const SelectPokemon2 = () => {
     setPlayerActivePokemon(playerPokemon2);
-    setPlayerHP(playerHP2);
+    setPokeballActive(false);
   };
 
   const SelectPokemon3 = () => {
     setPlayerActivePokemon(playerPokemon3);
-    setPlayerHP(playerHP3);
+    setPokeballActive(false);
   };
 
   const SelectPokemon4 = () => {
     setPlayerActivePokemon(playerPokemon4);
-    setPlayerHP(playerHP4);
+    setPokeballActive(false);
   };
 
   const SelectPokemon5 = () => {
     setPlayerActivePokemon(playerPokemon5);
-    setPlayerHP(playerHP5);
+    setPokeballActive(false);
   };
+
   const ChangePokemon = () => {
+    setPokeballActive(true);
+  };
+
+  const PlayerIsAttacked = () => {
+    const playerHPTaken = playerUsingSpA
+      ? ((pcSpAttack
+          ? pokedex[playerActivePokemon].base["Sp. Defense"]
+          : pokedex[playerActivePokemon].base.Defense) *
+          (pcSpAttack
+            ? pokedex[pcActivePokemon].base["Sp. Attack"]
+            : pokedex[pcActivePokemon].base.Attack)) /
+        230
+      : pcSpAttack
+      ? (pokedex[playerActivePokemon].base["Sp. Defense"] *
+          pokedex[pcActivePokemon].base["Sp. Attack"]) /
+        230
+      : (pokedex[playerActivePokemon].base.Defense *
+          pokedex[pcActivePokemon].base.Attack) /
+        230;
     if (playerActivePokemon === playerPokemon1) {
-      setPlayerHP1(playerHP);
+      playerHP1 - playerHPTaken > 0
+        ? setPlayerHP1(Math.round(playerHP1 - playerHPTaken))
+        : setPlayerHP1(0);
     } else if (playerActivePokemon === playerPokemon2) {
-      setPlayerHP2(playerHP);
+      playerHP1 - playerHPTaken > 0
+        ? setPlayerHP2(Math.round(playerHP2 - playerHPTaken))
+        : setPlayerHP2(0);
     } else if (playerActivePokemon === playerPokemon3) {
-      setPlayerHP3(playerHP);
+      playerHP1 - playerHPTaken > 0
+        ? setPlayerHP3(Math.round(playerHP3 - playerHPTaken))
+        : setPlayerHP3(0);
     } else if (playerActivePokemon === playerPokemon4) {
-      setPlayerHP4(playerHP);
+      playerHP1 - playerHPTaken > 0
+        ? setPlayerHP4(Math.round(playerHP4 - playerHPTaken))
+        : setPlayerHP4(0);
     } else {
-      setPlayerHP5(playerHP);
+      playerHP1 - playerHPTaken > 0
+        ? setPlayerHP5(Math.round(playerHP5 - playerHPTaken))
+        : setPlayerHP5(0);
+    }
+  };
+
+  const PcIsAttacked = () => {
+    const pcHPTaken = playerUsingSpA
+      ? (pokedex[pcActivePokemon].base["Sp. Defense"] *
+          pokedex[playerActivePokemon].base["Sp. Attack"]) /
+        230
+      : (pokedex[pcActivePokemon].base.Defense *
+          pokedex[playerActivePokemon].base.Attack) /
+        230;
+
+    if (pcActivePokemon === pcPokemon1) {
+      pcHP1 - pcHPTaken > 0
+        ? setPcHP1(Math.round(pcHP1 - pcHPTaken))
+        : setPcHP1(0);
+    } else if (pcActivePokemon === pcPokemon2) {
+      pcHP1 - pcHPTaken > 0
+        ? setPcHP2(Math.round(pcHP2 - pcHPTaken))
+        : setPcHP2(0);
+    } else if (pcActivePokemon === pcPokemon3) {
+      pcHP1 - pcHPTaken > 0
+        ? setPcHP3(Math.round(pcHP3 - pcHPTaken))
+        : setPcHP3(0);
+    } else if (pcActivePokemon === pcPokemon4) {
+      pcHP1 - pcHPTaken > 0
+        ? setPcHP4(Math.round(pcHP4 - pcHPTaken))
+        : setPcHP4(0);
+    } else {
+      pcHP1 - pcHPTaken > 0
+        ? setPcHP5(Math.round(pcHP5 - pcHPTaken))
+        : setPcHP5(0);
     }
   };
 
   //   Attack function
 
   const PlayerAttack = () => {
-    // console.log(
-    //   pcHP,
-    //   pcHPTaken,
-    //   playerHP,
-    //   playerTaken,
-    //   pcActivePokemon,
-    //   playerActivePokemon
-    // );
-    const pcHPTaken =
-      (pokedex[pcActivePokemon].base.Defense *
-        pokedex[playerActivePokemon].base.Attack) /
-      300;
-    const playerTaken = pcSpAttack
-      ? (pokedex[playerActivePokemon].base["Sp. Defense"] *
-          pokedex[pcActivePokemon].base["Sp. Attack"]) /
-        300
-      : (pokedex[playerActivePokemon].base.Defense *
-          pokedex[pcActivePokemon].base.Attack) /
-        300;
-
     if (
       pokedex[playerActivePokemon].base.Speed >
       pokedex[pcActivePokemon].base.Speed
     ) {
-      console.log(
-        pcHP,
-        pcHPTaken,
-        playerHP,
-        playerTaken,
-        pcActivePokemon,
-        playerActivePokemon
-      );
-      RefreshPcHP();
-      console.log(
-        pcHP,
-        pcHPTaken,
-        playerHP,
-        playerTaken,
-        pcActivePokemon,
-        playerActivePokemon
-      );
-      pcHP - pcHPTaken > 0 ? setPcHP(pcHP - pcHPTaken) : setPcHP(0);
+      PcIsAttacked();
 
       setTimeout(() => {
-        console.log(
-          pcHP,
-          pcHPTaken,
-          playerHP,
-          playerTaken,
-          pcActivePokemon,
-          playerActivePokemon
-        );
-        playerHP - playerTaken > 0
-          ? setPlayerHP(playerHP - playerTaken)
-          : setPlayerHP(0);
+        PlayerIsAttacked();
         setPcSpAttack(Math.random() > difficulty ? false : true);
         setPlayerSpAttack(Math.random() > difficulty ? true : false);
         SavePcHPandChange();
-        console.log(
-          pcHP,
-          pcHPTaken,
-          playerHP,
-          playerTaken,
-          pcActivePokemon,
-          playerActivePokemon
-        );
       }, delay);
     } else {
-      RefreshPcHP();
+      PlayerIsAttacked();
 
-      playerHP - playerTaken > 0
-        ? setPlayerHP(playerHP - playerTaken)
-        : setPlayerHP(0);
-      console.log(
-        pcHP,
-        pcHPTaken,
-        playerHP,
-        playerTaken,
-        pcActivePokemon,
-        playerActivePokemon
-      );
       setTimeout(() => {
-        console.log(
-          pcHP,
-          pcHPTaken,
-          playerHP,
-          playerTaken,
-          pcActivePokemon,
-          playerActivePokemon
-        );
-        pcHP - pcHPTaken > 0 ? setPcHP(pcHP - pcHPTaken) : setPcHP(0);
+        PcIsAttacked();
         setPcSpAttack(Math.random() > difficulty ? false : true);
         setPlayerSpAttack(Math.random() > difficulty ? true : false);
         SavePcHPandChange();
-        console.log(
-          pcHP,
-          pcHPTaken,
-          playerHP,
-          playerTaken,
-          pcActivePokemon,
-          playerActivePokemon
-        );
       }, delay);
     }
   };
@@ -404,40 +399,23 @@ export default function Fight({ activeUser }) {
   //  Special Attack function
 
   const PlayerSpAttack = () => {
-    const pcHPTaken =
-      (pokedex[pcActivePokemon].base["Sp. Defense"] *
-        pokedex[playerActivePokemon].base["Sp. Attack"]) /
-      230;
-    const playerTaken =
-      ((pcSpAttack
-        ? pokedex[playerActivePokemon].base["Sp. Defense"]
-        : pokedex[playerActivePokemon].base.Defense) *
-        (pcSpAttack
-          ? pokedex[pcActivePokemon].base["Sp. Attack"]
-          : pokedex[pcActivePokemon].base.Attack)) /
-      230;
+    setPlayerUsingSpA(true);
     if (
       pokedex[playerActivePokemon].base.Speed >
       pokedex[pcActivePokemon].base.Speed
     ) {
-      RefreshPcHP();
-      pcHP - pcHPTaken > 0 ? setPcHP(pcHP - pcHPTaken) : setPcHP(0);
+      PcIsAttacked();
 
       setTimeout(() => {
-        playerHP - playerTaken > 0
-          ? setPlayerHP(playerHP - playerTaken)
-          : setPlayerHP(0);
+        PlayerIsAttacked();
         setPcSpAttack(Math.random() > difficulty ? false : true);
         setPlayerSpAttack(Math.random() > difficulty ? true : false);
         SavePcHPandChange();
       }, delay);
     } else {
-      RefreshPcHP();
-      playerHP - playerTaken > 0
-        ? setPlayerHP(playerHP - playerTaken)
-        : setPlayerHP(0);
+      PlayerIsAttacked();
       setTimeout(() => {
-        pcHP - pcHPTaken > 0 ? setPcHP(pcHP - pcHPTaken) : setPcHP(0);
+        PcIsAttacked();
         setPcSpAttack(Math.random() > difficulty ? false : true);
         setPlayerSpAttack(Math.random() > difficulty ? true : false);
         SavePcHPandChange();
@@ -516,7 +494,7 @@ export default function Fight({ activeUser }) {
     pcHP5,
   ]);
 
-  console.log(gameOver);
+  console.log(playerPokemon1);
   return (
     <div className="Fightarena">
       <div>
@@ -526,7 +504,9 @@ export default function Fight({ activeUser }) {
             <div>
               <img
                 className="display userPlayer"
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon1}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  playerPokemon1 + 1
+                }.png`}
                 alt="userpokemons"
                 width={150}
                 height={110}
@@ -536,32 +516,76 @@ export default function Fight({ activeUser }) {
               <button
                 className="playbtn"
                 onClick={SelectPokemon1}
-                disabled={playerHP1 === 0 ? true : false}
+                disabled={
+                  playerHP1 === 0 ? true : pokeballActive ? false : true
+                }
               >
                 Pokemon 1 || {playerHP1}
               </button>
             </div>
           </div>
           <button
-          className="pokball"
-          onClick={ChangePokemon}><img
+            className="pokball"
+            onClick={ChangePokemon}
+            style={{
+              background: "white",
+            }}
+          >
+            <img
               src={Ball}
               // src={Pokeball}
               alt="Pokeball"
-              style={{ width: "6rem", height: "6rem" }}
-            /> </button>
-      <div>
-      <button className="plybtn" onClick={PlayerAttack} style={{ width: "12rem", height: "4rem" }}>PLAYER: attack</button>
-      {playerSpAttack && (
-        <button className="plybtn" onClick={PlayerSpAttack} style={{width: "12rem", height: "4rem"  }}>PLAYER: special attack</button>
-        )}
-      </div>
-     
-  
-          
+              style={{
+                width: "6rem",
+                height: "6rem",
+              }}
+            />{" "}
+          </button>
+          <div>
+            <button
+              className="plybtn"
+              onClick={PlayerAttack}
+              style={{ width: "12rem", height: "4rem" }}
+              disabled={
+                playerActivePokemon === playerPokemon1 && playerHP1 === 0
+                  ? true
+                  : playerActivePokemon === playerPokemon2 && playerHP2 === 0
+                  ? true
+                  : playerActivePokemon === playerPokemon3 && playerHP3 === 0
+                  ? true
+                  : playerActivePokemon === playerPokemon4 && playerHP4 === 0
+                  ? true
+                  : false
+              }
+            >
+              PLAYER: attack
+            </button>
+            {playerSpAttack && (
+              <button
+                className="plybtn"
+                onClick={PlayerSpAttack}
+                style={{ width: "12rem", height: "4rem" }}
+                disabled={
+                  playerActivePokemon === playerPokemon1 && playerHP1 === 0
+                    ? true
+                    : playerActivePokemon === playerPokemon2 && playerHP2 === 0
+                    ? true
+                    : playerActivePokemon === playerPokemon3 && playerHP3 === 0
+                    ? true
+                    : playerActivePokemon === playerPokemon4 && playerHP4 === 0
+                    ? true
+                    : false
+                }
+              >
+                PLAYER: special attack
+              </button>
+            )}
+          </div>
           <img
             className="display userPlayer"
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[0]}.png`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+              pcPokemonId[0] + 1
+            }.png`}
             alt="userpokemons"
             width={150}
             height={110}
@@ -572,7 +596,9 @@ export default function Fight({ activeUser }) {
             <div>
               <img
                 className="display userPlayer"
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon2}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  playerPokemon2 + 1
+                }.png`}
                 alt="userpokemons"
                 width={150}
                 height={110}
@@ -582,7 +608,9 @@ export default function Fight({ activeUser }) {
               <button
                 className="playbtn"
                 onClick={SelectPokemon2}
-                disabled={playerHP2 === 0 ? true : false}
+                disabled={
+                  playerHP2 === 0 ? true : pokeballActive ? false : true
+                }
               >
                 Pokemon 2|| {playerHP2}
               </button>
@@ -590,7 +618,9 @@ export default function Fight({ activeUser }) {
           </div>
           <img
             className="display userPlayer"
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[1]}.png`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+              pcPokemonId[1] + 1
+            }.png`}
             alt="userpokemons"
             width={150}
             height={110}
@@ -601,7 +631,9 @@ export default function Fight({ activeUser }) {
             <div>
               <img
                 className="display userPlayer"
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon3}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  playerPokemon3 + 1
+                }.png`}
                 alt="userpokemons"
                 width={150}
                 height={110}
@@ -611,15 +643,19 @@ export default function Fight({ activeUser }) {
               <button
                 className="playbtn"
                 onClick={SelectPokemon3}
-                disabled={playerHP3 === 0 ? true : false}
+                disabled={
+                  playerHP3 === 0 ? true : pokeballActive ? false : true
+                }
               >
-                Pokemon 3 {playerHP3}
+                Pokemon 3 || {playerHP3}
               </button>
             </div>
           </div>
           <img
             className="display userPlayer"
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[2]}.png`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+              pcPokemonId[2] + 1
+            }.png`}
             alt="userpokemons"
             width={150}
             height={110}
@@ -630,7 +666,9 @@ export default function Fight({ activeUser }) {
             <div>
               <img
                 className="display userPlayer"
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon4}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  playerPokemon4 + 1
+                }.png`}
                 alt="userpokemons"
                 width={150}
                 height={110}
@@ -640,7 +678,9 @@ export default function Fight({ activeUser }) {
               <button
                 className="playbtn"
                 onClick={SelectPokemon4}
-                disabled={playerHP3 === 0 ? true : false}
+                disabled={
+                  playerHP4 === 0 ? true : pokeballActive ? false : true
+                }
               >
                 Pokemon 4 || {playerHP4}
               </button>
@@ -648,7 +688,9 @@ export default function Fight({ activeUser }) {
           </div>
           <img
             className="display userPlayer"
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[3]}.png`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+              pcPokemonId[3] + 1
+            }.png`}
             alt="userpokemons"
             width={150}
             height={110}
@@ -659,7 +701,9 @@ export default function Fight({ activeUser }) {
             <div>
               <img
                 className="display userPlayer"
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${playerPokemon5}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  playerPokemon5 + 1
+                }.png`}
                 alt="userpokemons"
                 width={150}
                 height={110}
@@ -669,7 +713,9 @@ export default function Fight({ activeUser }) {
               <button
                 className="playbtn"
                 onClick={SelectPokemon5}
-                disabled={playerHP5 === 0 ? true : false}
+                disabled={
+                  playerHP5 === 0 ? true : pokeballActive ? false : true
+                }
               >
                 Pokemon 5 || {playerHP5}
               </button>
@@ -677,7 +723,9 @@ export default function Fight({ activeUser }) {
           </div>
           <img
             className="display userPlayer"
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pcPokemonId[4]}.png`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+              pcPokemonId[4] + 1
+            }.png`}
             alt="userpokemons"
             width={150}
             height={110}
@@ -689,72 +737,117 @@ export default function Fight({ activeUser }) {
         PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
       </h1> */}
 
-     
-
       <div className="bouncy">
-      <div className="bounce-2 ">
-        {playerActivePokemon === playerPokemon1 ? (
-          <div className="singlePokemonBack bounce-2 ">
-            <h6>
-              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
-              <ProgressBar className="progress" animated now={playerHP} />
-            </h6>
-            <img src={imagePokemon1} className="singlePokemonBack bounce-2 " />
-          </div>
-        ) : playerActivePokemon === playerPokemon2 ? (
-          <div className="singlePokemonBack bounce-2 ">
-            {" "}
-            <h6>
-              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
-              <ProgressBar className="progress" animated now={playerHP} />
-            </h6>
-            <img src={imagePokemon2} className="singlePokemonBack bounce-2 " />
-          </div>
-        ) : playerActivePokemon === playerPokemon3 ? (
-          <div className="singlePokemonBack bounce-2 ">
-            {" "}
-            <h6>
-              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
-              <ProgressBar className="progress" animated now={playerHP} />
-            </h6>
-            <img src={imagePokemon3} className="singlePokemonBack bounce-2 " />
-          </div>
-        ) : playerActivePokemon === playerPokemon4 ? (
-          <div className="singlePokemonBack bounce-2 ">
-            {" "}
-            <h6>
-              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
-              <ProgressBar className="progress" animated now={playerHP} />
-            </h6>
-            <img src={imagePokemon4} className="singlePokemonBack bounce-2 " />
-          </div>
-        ) : playerActivePokemon === playerPokemon5 ? (
-          <div className="singlePokemonBack bounce-2 ">
-            {" "}
-            <h6>
-              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
-              <ProgressBar className="progress" animated now={playerHP} />
-            </h6>
-            <img src={imagePokemon5} className="singlePokemonBack bounce-2 " />
-          </div>
-        ) : (
-          <div className="singlePokemonBack bounce-2 ">
-            {" "}
-            <h6>
-              PLAYER HP: {playerHP} / {pokedex[playerActivePokemon].base.HP}
-              <ProgressBar className="progress" animated now={playerHP} />
-            </h6>
-            <img className="singlePokemonBack bounce-2 " src={imagePokemon1} />
-          </div>
-        )}
-      </div>
-      <div className="bounce-2 ">
-
+        <div className="bounce-2 ">
+          {playerActivePokemon === playerPokemon1 ? (
+            <div className="singlePokemonBack bounce-2 ">
+              <h6>
+                PLAYER HP: {playerHP1} / {pokedex[playerPokemon1].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(playerHP1 * 100) / pokedex[playerPokemon1].base.HP}
+                  label={`${Math.round(
+                    (playerHP1 * 100) / pokedex[playerPokemon1].base.HP
+                  )}%`}
+                />
+              </h6>
+              <img
+                src={imagePokemon1}
+                className="singlePokemonBack bounce-2 "
+              />
+            </div>
+          ) : playerActivePokemon === playerPokemon2 ? (
+            <div className="singlePokemonBack bounce-2 ">
+              {" "}
+              <h6>
+                PLAYER HP: {playerHP2} / {pokedex[playerPokemon2].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(playerHP2 * 100) / pokedex[playerPokemon2].base.HP}
+                  label={`${Math.round(
+                    (playerHP2 * 100) / pokedex[playerPokemon2].base.HP
+                  )}%`}
+                />
+              </h6>
+              <img
+                src={imagePokemon2}
+                className="singlePokemonBack bounce-2 "
+              />
+            </div>
+          ) : playerActivePokemon === playerPokemon3 ? (
+            <div className="singlePokemonBack bounce-2 ">
+              {" "}
+              <h6>
+                PLAYER HP: {playerHP3} / {pokedex[playerPokemon3].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(playerHP3 * 100) / pokedex[playerPokemon3].base.HP}
+                  label={`${Math.round(
+                    (playerHP3 * 100) / pokedex[playerPokemon3].base.HP
+                  )}%`}
+                />
+              </h6>
+              <img
+                src={imagePokemon3}
+                className="singlePokemonBack bounce-2 "
+              />
+            </div>
+          ) : playerActivePokemon === playerPokemon4 ? (
+            <div className="singlePokemonBack bounce-2 ">
+              {" "}
+              <h6>
+                PLAYER HP: {playerHP4} / {pokedex[playerPokemon4].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(playerHP4 * 100) / pokedex[playerPokemon4].base.HP}
+                  label={`${Math.round(
+                    (playerHP4 * 100) / pokedex[playerPokemon4].base.HP
+                  )}%`}
+                />
+              </h6>
+              <img
+                src={imagePokemon4}
+                className="singlePokemonBack bounce-2 "
+              />
+            </div>
+          ) : (
+            <div className="singlePokemonBack bounce-2 ">
+              {" "}
+              <h6>
+                PLAYER HP: {playerHP5} / {pokedex[playerPokemon5].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(playerHP5 * 100) / pokedex[playerPokemon5].base.HP}
+                  label={`${Math.round(
+                    (playerHP5 * 100) / pokedex[playerPokemon5].base.HP
+                  )}%`}
+                />
+              </h6>
+              <img
+                src={imagePokemon5}
+                className="singlePokemonBack bounce-2 "
+              />
+            </div>
+          )}
+        </div>
+        <div className="bounce-2 ">
           {pcActivePokemon === pcPokemon1 ? (
             <div className="randomPokemon bounce-2">
               <h6>
-                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
-                <ProgressBar className="progress" animated now={pcHP} />
+                PC HP: {pcHP1} / {pokedex[pcPokemon1].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(pcHP1 * 100) / pokedex[pcPokemon1].base.HP}
+                  label={`${Math.round(
+                    (pcHP1 * 100) / pokedex[pcPokemon1].base.HP
+                  )}%`}
+                />
               </h6>
               <img src={imagePCPokemon1} className="randomPokemon bounce-2" />
             </div>
@@ -762,8 +855,15 @@ export default function Fight({ activeUser }) {
             <div className="randomPokemon bounce-2">
               {" "}
               <h6>
-                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
-                <ProgressBar className="progress" animated now={pcHP} />
+                PC HP: {pcHP2} / {pokedex[pcPokemon2].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(pcHP2 * 100) / pokedex[pcPokemon2].base.HP}
+                  label={`${Math.round(
+                    (pcHP2 * 100) / pokedex[pcPokemon2].base.HP
+                  )}%`}
+                />
               </h6>
               <img src={imagePCPokemon2} className="randomPokemon bounce-2" />
             </div>
@@ -771,8 +871,15 @@ export default function Fight({ activeUser }) {
             <div className="randomPokemon bounce-2">
               {" "}
               <h6>
-                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
-                <ProgressBar className="progress" animated now={pcHP} />
+                PC HP: {pcHP3} / {pokedex[pcPokemon3].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(pcHP3 * 100) / pokedex[pcPokemon3].base.HP}
+                  label={`${Math.round(
+                    (pcHP3 * 100) / pokedex[pcPokemon3].base.HP
+                  )}%`}
+                />
               </h6>
               <img src={imagePCPokemon3} className="randomPokemon bounce-2" />
             </div>
@@ -780,33 +887,41 @@ export default function Fight({ activeUser }) {
             <div className="randomPokemon bounce-2">
               {" "}
               <h6>
-                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
-                <ProgressBar className="progress" animated now={pcHP} />
+                PC HP: {pcHP4} / {pokedex[pcPokemon4].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(pcHP4 * 100) / pokedex[pcPokemon4].base.HP}
+                  label={`${Math.round(
+                    (pcHP4 * 100) / pokedex[pcPokemon4].base.HP
+                  )}%`}
+                />
               </h6>
               <img src={imagePCPokemon4} className="randomPokemon bounce-2" />
-            </div>
-          ) : pcActivePokemon === pcPokemon5 ? (
-            <div className="randomPokemon bounce-2">
-              {" "}
-              <h6>
-                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
-                <ProgressBar className="progress" animated now={pcHP} />
-              </h6>
-              <img src={imagePCPokemon5} className="randomPokemon bounce-2" />
             </div>
           ) : (
             <div className="randomPokemon bounce-2">
               {" "}
               <h6>
-                PC HP: {pcHP} / {pokedex[pcActivePokemon].base.HP}
-                <ProgressBar className="progress" animated now={pcHP} />
+                PC HP: {pcHP5} / {pokedex[pcPokemon5].base.HP}
+                <ProgressBar
+                  className="progress"
+                  animated
+                  now={(pcHP5 * 100) / pokedex[pcPokemon5].base.HP}
+                  label={`${Math.round(
+                    (pcHP5 * 100) / pokedex[pcPokemon5].base.HP
+                  )}%`}
+                />
               </h6>
-              <img className="randomPokemon bounce-2" src={imagePCPokemon1} />
+              <img src={imagePCPokemon5} className="randomPokemon bounce-2" />
             </div>
           )}
         </div>
       </div>
-   
+      <div className="m-5">
+        <h1 className="text-center">Fight!!</h1>
+      </div>
+
       <p>Attack: {`${pokedex[playerActivePokemon].base.Attack}`} </p>
       <p>Defense: {`${pokedex[playerActivePokemon].base.Defense}`} </p>
       <p>
@@ -816,36 +931,9 @@ export default function Fight({ activeUser }) {
         Special Defense: {`${pokedex[playerActivePokemon].base["Sp. Defense"]}`}{" "}
       </p>
       <p>Speed: {`${pokedex[playerActivePokemon].base.Speed}`} </p>
-     
+
       <div>
         <p>PcActivePoki: {pcActivePokemon} </p>
-        <p>Attack: {`${pokedex[pcActivePokemon].base.Defense}`} </p>
-        <p>Defense: {`${pokedex[pcActivePokemon].base.Defense}`} </p>
-        <p>
-          Special Attack: {`${pokedex[pcActivePokemon].base["Sp. Attack"]}`}{" "}
-        </p>
-        <p>
-          Special Defense: {`${pokedex[pcActivePokemon].base["Sp. Defense"]}`}{" "}
-        </p>
-        <p>Speed: {`${pokedex[pcActivePokemon].base.Speed}`} </p>
-      </div>
-      <div>
-        <p>active poki: {pcActivePokemon}</p>
-        <p>
-          poki1 {pcPokemon1}: {pcHP1}{" "}
-        </p>
-        <p>
-          poki2 {pcPokemon2}: {pcHP2}
-        </p>
-        <p>
-          poki3 {pcPokemon3}: {pcHP3}
-        </p>
-        <p>
-          poki4 {pcPokemon4}: {pcHP4}
-        </p>
-        <p>
-          poki5 {pcPokemon5}: {pcHP5}
-        </p>
       </div>
       {gameOver && <Navigate to="/Score" />}
     </div>

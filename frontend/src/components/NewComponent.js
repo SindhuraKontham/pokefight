@@ -3,7 +3,8 @@ import Card from "react-bootstrap/Card";
 import PokemonType from "./PokemonType";
 import axios from "axios";
 import Pokemon from "./Pokemon";
-import "./pokemoninfo.css"
+import "./pokemoninfo.css";
+import pokedex from "./pokedex.json";
 // import Button from "./Button";
 
 export default function NewComponent({
@@ -12,14 +13,12 @@ export default function NewComponent({
   cart,
   setCart,
   user,
-  pokedex,
   setClick,
   click,
 }) {
   const [btnState, setBtnState] = useState(false);
 
   const handleOnClick = () => {
-
     setClick(!click);
   };
 
@@ -36,7 +35,6 @@ export default function NewComponent({
           className="cardpoke"
           border="primary"
           style={{ width: "13rem", height: "17rem" }}
-
         >
           <PokemonType id={index} name={pokemon.name} />
           <Card.Img
@@ -52,7 +50,6 @@ export default function NewComponent({
             <button className="button full">
               Full, check your cart to remove or edit{" "}
             </button>
-
           </Card.Body>
         </Card>
       ) : (
@@ -73,10 +70,8 @@ export default function NewComponent({
             </Card.Title>
             <Pokemon url={pokemon.url} />
             {/* <Button url={pokemon.url} btnState={btnState} cart={cart} pokemon={pokemon} setCart={setCart} setActive={setActive} user={user} handleOnClick={handleOnClick} /> */}
-            
 
             {!btnState ? (
-
               <>
                 <button
                   onClick={() => {
@@ -118,7 +113,6 @@ export default function NewComponent({
                   Add
                 </button>
                 <button onClick={handleOnClick} className="button more">
-
                   More
                 </button>
               </>
@@ -126,7 +120,6 @@ export default function NewComponent({
               <>
                 <button className="button remove"> Remove</button>
                 <button className="button more">More</button>
-
               </>
             )}
           </Card.Body>

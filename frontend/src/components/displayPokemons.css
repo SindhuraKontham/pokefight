@@ -1,17 +1,16 @@
 .display {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 .span {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .bouncy {
-   background-color: aqua;
+  background-color: aqua;
 }
 
 .pokball {
-    mix-blend-mode: multiply;
-    border-radius: 15rem;
+  border-radius: 20rem;
 }
