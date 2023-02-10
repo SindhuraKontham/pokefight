@@ -78,10 +78,10 @@ function PokemonInfo({ pokemonsInfo,setPokemonsInfo,cart, setCart, user,setActiv
     return data.filter((item) => item.name.toLowerCase().includes(query));
   };
 
-  const sort = (data) => {
-    console.log(data)
-    return data.sort()
-  }
+  // const sort = (data) => {
+  //   console.log(data)
+  //   return data.sort((a, b) => () )
+  // }
 
   return (
     <div>
